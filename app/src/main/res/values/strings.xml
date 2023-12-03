@@ -6,4 +6,20 @@
     <string name="title_screen">Get\n Cooking</string>
     <string name="desc_screen">Simple way to find Tasty Recipe</string>
     <string name="button_screen">Start CookNow</string>
+
+    <!-- Login -->
+    <string name="title_login">Hello,</string>
+    <string name="subtitle_login">Welcome Back!</string>
+    <string name="show_password">Show Password</string>
+    <string name="login">Sign In</string>
+    <string name="ask_login">Don\'t have an account?</string>
+
+    <!-- Login & Register -->
+    <string name="email">Email</string>
+    <string name="email_placeholder">Enter Email</string>
+    <string name="password">Password</string>
+    <string name="password_placeholder">Enter Password</string>
+
+    <!-- Register -->
+    <string name="register">Sign Up</string>
 </resources>
