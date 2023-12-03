@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">CookNow</string>
+
+    // Welcome Screen
+    <string name="header_screen">100K+ Premium Recipe</string>
+    <string name="title_screen">Get\n Cooking</string>
+    <string name="desc_screen">Simple way to find Tasty Recipe</string>
+    <string name="button_screen">Start CookNow</string>
 </resources>
