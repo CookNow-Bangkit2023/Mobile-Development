@@ -21,5 +21,14 @@
     <string name="password_placeholder">Enter Password</string>
 
     <!-- Register -->
+    <string name="title_register">Create an account</string>
+    <string name="subtitle_register">Let\'s help your account,\nit won\'t take long.</string>
+    <string name="consent">Accept terms &amp; Condition </string>
     <string name="register">Sign Up</string>
+    <string name="name">Name</string>
+    <string name="name_placeholder">Enter Name</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="retype_password_placeholder">Retype Password</string>
+    <string name="ask_register">Already a member?</string>
+
 </resources>
