@@ -31,4 +31,13 @@
     <string name="retype_password_placeholder">Retype Password</string>
     <string name="ask_register">Already a member?</string>
 
+    <!-- Profile -->
+    <string name="profile">Profile</string>
+    <string name="picture">picture</string>
+    <string name="username">username</string>
+    <string name="post_email">post email</string>
+    <string name="logout">Logout</string>
+    <string name="content_home">content_home</string>
+    <string name="content_add">content_add</string>
+    <string name="content_profil">content_profil</string>
 </resources>
