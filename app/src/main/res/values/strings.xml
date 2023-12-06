@@ -16,9 +16,14 @@
 
     <!-- Login & Register -->
     <string name="email">Email</string>
+    <string name="email_empty">Email cannot be empty</string>
     <string name="email_placeholder">Enter Email</string>
+    <string name="email_invalid">Invalid Email</string>
     <string name="password">Password</string>
+    <string name="password_empty">Password cannot be empty</string>
+    <string name="password_length">Password at least 8 characters</string>
     <string name="password_placeholder">Enter Password</string>
+    <string name="login_success">Login Success!</string>
 
     <!-- Register -->
     <string name="title_register">Create an account</string>
@@ -30,6 +35,7 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="retype_password_placeholder">Retype Password</string>
     <string name="ask_register">Already a member?</string>
+    <string name="register_success">Register Success!</string>
 
     <!-- Profile -->
     <string name="profile">Profile</string>

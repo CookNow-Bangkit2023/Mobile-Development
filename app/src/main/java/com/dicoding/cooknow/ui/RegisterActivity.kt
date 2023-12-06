@@ -9,24 +9,74 @@ import android.text.TextUtils
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
+import android.util.Patterns
 import android.view.View
+import android.widget.Toast
 import com.dicoding.cooknow.R
 import com.dicoding.cooknow.databinding.ActivityRegisterBinding
+import com.google.firebase.auth.FirebaseAuth
 
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
+    private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.registerButton.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
+        auth = FirebaseAuth.getInstance()
+
         customSpan()
+
+        binding.registerButton.setOnClickListener {
+            val email = binding.edtEmailRegister.text.toString()
+            val password = binding.edtPasswordRegister.text.toString()
+
+            // Validasi Email
+            if (email.isEmpty()){
+                binding.edtEmailRegister.error = getString(R.string.email_empty)
+                binding.edtEmailRegister.requestFocus()
+                return@setOnClickListener
+            }
+
+            // Validasi Email tidak sesuai
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                binding.edtEmailRegister.error = getString(R.string.email_invalid)
+                binding.edtEmailRegister.requestFocus()
+                return@setOnClickListener
+            }
+
+            // Validasi Password
+            if (password.isEmpty()){
+                binding.edtPasswordRegister.error = getString(R.string.password_empty)
+                binding.edtPasswordRegister.requestFocus()
+                return@setOnClickListener
+            }
+
+            // Validasi panjang password
+            if (password.length < 8){
+                binding.edtPasswordRegister.error = getString(R.string.password_length)
+                binding.edtPasswordRegister.requestFocus()
+                return@setOnClickListener
+            }
+
+            RegisterFirebase(email, password)
+        }
+    }
+
+    private fun RegisterFirebase(email: String, password: String){
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this){
+                if (it.isSuccessful){
+                    Toast.makeText(this, getString(R.string.register_success), Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, LoginActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                } else {
+                    Toast.makeText(this, "${it.exception?.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
     }
 
     private fun customSpan(){
