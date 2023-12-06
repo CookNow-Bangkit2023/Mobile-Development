@@ -26,7 +26,7 @@ class RegisterActivity : AppCompatActivity() {
             finish()
         }
 
-        val goRegisterText = getString(R.string.register)
+        val goRegisterText = getString(R.string.login)
         val spannableString = SpannableString(goRegisterText)
 
         val clickableSpan = object : ClickableSpan() {
