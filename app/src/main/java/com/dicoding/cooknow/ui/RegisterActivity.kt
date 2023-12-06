@@ -5,6 +5,7 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.SpannableString
+import android.text.TextUtils
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
@@ -25,6 +26,11 @@ class RegisterActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+        customSpan()
+    }
+
+    private fun customSpan(){
+        val registerText = binding.askRegister
 
         val goRegisterText = getString(R.string.login)
         val spannableString = SpannableString(goRegisterText)
@@ -40,7 +46,7 @@ class RegisterActivity : AppCompatActivity() {
         val color = Color.parseColor("#FF9C00")
         spannableString.setSpan(ForegroundColorSpan(color), 0, goRegisterText.length, SpannableString.SPAN_INCLUSIVE_EXCLUSIVE)
 
-        binding.goLogin.text = spannableString
-        binding.goLogin.movementMethod = LinkMovementMethod.getInstance()
+        registerText.text = TextUtils.concat(getString(R.string.ask_register)," ", spannableString)
+        registerText.movementMethod = LinkMovementMethod.getInstance()
     }
 }
