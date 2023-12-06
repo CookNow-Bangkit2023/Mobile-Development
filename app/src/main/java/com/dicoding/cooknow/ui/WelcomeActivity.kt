@@ -20,22 +20,6 @@ class WelcomeActivity : AppCompatActivity() {
         binding = ActivityWelcomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-            val user = Firebase.auth.currentUser
-            val intent: Intent
-
-            if (user != null) {
-                // User is logged in
-                Log.d("MainActivity", "User is logged in with email: ${user.email}")
-                intent = Intent(this, MainActivity::class.java)
-            } else {
-                // User is not logged in
-                Log.d("LoginActivity", "User is not logged in")
-                intent = Intent(this, LoginActivity::class.java)
-            }
-
-            startActivity(intent)
-            finish()
-
         binding.buttonScreen.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
