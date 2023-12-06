@@ -67,12 +67,10 @@
         app:layout_constraintEnd_toEndOf="@id/usernameTitle"
         app:layout_constraintTop_toBottomOf="@id/usernameTitle" />
 
-
-
     <Button
         android:id="@+id/logoutButton"
         android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_height="70dp"
         android:layout_marginBottom="65dp"
         android:layout_marginTop="180dp"
         android:text="@string/logout"
@@ -84,58 +82,5 @@
         app:layout_constraintTop_toBottomOf="@id/card"
         android:background="@drawable/rounded_button"
         />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/bottom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#F4F4F4"
-        android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <ImageView
-            android:id="@+id/homeButton"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:padding="4dp"
-            android:contentDescription="@string/content_home"
-            app:layout_constraintBottom_toBottomOf="@+id/bottom"
-            app:layout_constraintEnd_toStartOf="@+id/addButton"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/hut"
-            app:tint="@color/black" />
-
-        <ImageView
-            android:id="@+id/addButton"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:contentDescription="@string/content_add"
-            app:layout_constraintBottom_toBottomOf="@+id/homeButton"
-            app:layout_constraintEnd_toStartOf="@+id/profileButton"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/homeButton"
-            app:layout_constraintTop_toTopOf="@+id/homeButton"
-            app:srcCompat="@drawable/add"
-            app:tint="@color/black" />
-
-        <ImageView
-            android:id="@+id/profileButton"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:contentDescription="@string/content_profil"
-            android:padding="0dp"
-            app:layout_constraintBottom_toBottomOf="@+id/addButton"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/addButton"
-            app:layout_constraintTop_toTopOf="@+id/addButton"
-            app:layout_constraintVertical_bias="0.5"
-            app:srcCompat="@drawable/profileicon"
-            app:tint="@color/black"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
