@@ -41,9 +41,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginStart="32dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/registerSubTitle"
-        android:alpha="0"
-        tools:alpha="100"/>
+        app:layout_constraintTop_toBottomOf="@id/registerSubTitle" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/nameEditTextLayout"
@@ -90,7 +88,7 @@
             android:id="@+id/edt_email_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"/>
+            android:inputType="textEmailAddress" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -120,7 +118,7 @@
             android:id="@+id/edt_password_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"/>
+            android:inputType="textPassword"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -147,19 +145,20 @@
         app:layout_constraintTop_toBottomOf="@+id/rePasswordTextView">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_confirmpassword_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"/>
+            android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <CheckBox
-        android:id="@+id/consentVisible"
+        android:id="@+id/passwordVisible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginTop="10dp"
-        android:text="@string/consent"
+        android:text="@string/show_password"
         app:layout_constraintStart_toStartOf="@id/rePasswordEditTextLayout"
         app:layout_constraintTop_toBottomOf="@id/rePasswordEditTextLayout"/>
 
@@ -175,7 +174,7 @@
         android:paddingRight="60dp"
         app:layout_constraintStart_toStartOf="@id/emailEditTextLayout"
         app:layout_constraintEnd_toEndOf="@id/emailEditTextLayout"
-        app:layout_constraintTop_toBottomOf="@id/consentVisible"
+        app:layout_constraintTop_toBottomOf="@id/passwordVisible"
         android:drawableEnd="@drawable/baseline_arrow_forward_24"
         android:background="@drawable/rounded_button"
         />
@@ -186,7 +185,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/ask_register"
-        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/registerButton"
         app:layout_constraintStart_toStartOf="@+id/registerButton"
         app:layout_constraintTop_toBottomOf="@+id/registerButton" />

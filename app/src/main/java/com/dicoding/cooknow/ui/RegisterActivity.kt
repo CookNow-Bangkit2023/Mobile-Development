@@ -7,26 +7,88 @@ import android.os.Bundle
 import android.text.SpannableString
 import android.text.TextUtils
 import android.text.method.LinkMovementMethod
+import android.text.method.PasswordTransformationMethod
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
+import android.util.Patterns
 import android.view.View
+import android.widget.CheckBox
+import android.widget.Toast
 import com.dicoding.cooknow.R
 import com.dicoding.cooknow.databinding.ActivityRegisterBinding
+import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.auth.FirebaseAuth
 
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
+    private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.registerButton.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
+        auth = FirebaseAuth.getInstance()
+
         customSpan()
+        showPassword()
+
+        binding.registerButton.setOnClickListener {
+            val email = binding.edtEmailRegister.text.toString()
+            val password = binding.edtPasswordRegister.text.toString()
+            val confirmPassword = binding.edtConfirmpasswordRegister.text.toString()
+
+
+            // Validasi Email
+            if (email.isEmpty()){
+                binding.edtEmailRegister.error = getString(R.string.email_empty)
+                binding.edtEmailRegister.requestFocus()
+                return@setOnClickListener
+            }
+
+            // Validasi Email tidak sesuai
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                binding.edtEmailRegister.error = getString(R.string.email_invalid)
+                binding.edtEmailRegister.requestFocus()
+                return@setOnClickListener
+            }
+
+            // Validasi Password
+            if (password.isEmpty()){
+                binding.edtPasswordRegister.error = getString(R.string.password_empty)
+                binding.edtPasswordRegister.requestFocus()
+                return@setOnClickListener
+            }
+
+            // Validasi panjang password
+            if (password.length < 8){
+                binding.edtPasswordRegister.error = getString(R.string.password_length)
+                binding.edtPasswordRegister.requestFocus()
+                return@setOnClickListener
+            }
+
+            if (!confirmPassword.equals(password)){
+                binding.edtConfirmpasswordRegister.error = getString(R.string.confirm_password_invalid)
+                binding.edtConfirmpasswordRegister.requestFocus()
+                return@setOnClickListener
+            }
+
+            RegisterFirebase(email, password)
+        }
+    }
+
+    private fun RegisterFirebase(email: String, password: String){
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this){
+                if (it.isSuccessful){
+                    Toast.makeText(this, getString(R.string.register_success), Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, LoginActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                } else {
+                    Toast.makeText(this, "${it.exception?.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
     }
 
     private fun customSpan(){
@@ -48,5 +110,24 @@ class RegisterActivity : AppCompatActivity() {
 
         registerText.text = TextUtils.concat(getString(R.string.ask_register)," ", spannableString)
         registerText.movementMethod = LinkMovementMethod.getInstance()
+    }
+
+    private fun showPassword(){
+        val passwordEditText: TextInputEditText = binding.edtPasswordRegister
+        val confirmpasswordEditText: TextInputEditText = binding.edtConfirmpasswordRegister
+        val passwordVisibleCheckBox: CheckBox = binding.passwordVisible
+
+        passwordVisibleCheckBox.setOnCheckedChangeListener { _, isChecked ->
+            // Pengecekan menggunakan Checkbox
+            if (isChecked) {
+                // Jika Checkbox dicentang, tampilkan teks password
+                passwordEditText.transformationMethod = null
+                confirmpasswordEditText.transformationMethod = null
+            } else {
+                // Jika Checkbox tidak dicentang, sembunyikan teks password
+                passwordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
+                confirmpasswordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
+            }
+        }
     }
 }

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "90932955738",
+    "project_id": "ch2-ps066-capstone",
+    "storage_bucket": "ch2-ps066-capstone.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:90932955738:android:87aa4028cb8653c2b36663",
+        "android_client_info": {
+          "package_name": "com.dicoding.cooknow"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZuquNx3IJb-mO-dOhk3IJXAPOQw4U1pU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
