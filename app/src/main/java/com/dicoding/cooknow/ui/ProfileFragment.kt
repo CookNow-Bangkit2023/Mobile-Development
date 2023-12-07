@@ -28,6 +28,7 @@ class ProfileFragment : Fragment() {
             activity?.finish()
         }
 
+        showIdentity()
     }
 
     override fun onCreateView(
@@ -41,5 +42,12 @@ class ProfileFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun showIdentity(){
+        val emailText = binding.card
+        val emailUser = auth.currentUser?.email
+
+        emailText.text = emailUser
     }
 }
