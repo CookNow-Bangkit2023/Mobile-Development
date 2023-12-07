@@ -7,13 +7,16 @@ import android.os.Bundle
 import android.text.SpannableString
 import android.text.TextUtils
 import android.text.method.LinkMovementMethod
+import android.text.method.PasswordTransformationMethod
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
 import android.util.Patterns
 import android.view.View
+import android.widget.CheckBox
 import android.widget.Toast
 import com.dicoding.cooknow.R
 import com.dicoding.cooknow.databinding.ActivityLoginBinding
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
@@ -28,6 +31,7 @@ class LoginActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
         customSpan()
+        showPassword()
 
         binding.loginButton.setOnClickListener {
             val email = binding.edtEmailLogin.text.toString()
@@ -90,5 +94,21 @@ class LoginActivity : AppCompatActivity() {
 
         registerText.text = TextUtils.concat(getString(R.string.ask_login)," ", spannableString)
         registerText.movementMethod = LinkMovementMethod.getInstance()
+    }
+
+    private fun showPassword(){
+        val passwordEditText: TextInputEditText = binding.edtPasswordLogin
+        val passwordVisibleCheckBox: CheckBox = binding.passwordVisible
+
+        passwordVisibleCheckBox.setOnCheckedChangeListener { _, isChecked ->
+            // Pengecekan menggunakan Checkbox
+            if (isChecked) {
+                // Jika Checkbox dicentang, tampilkan teks password
+                passwordEditText.transformationMethod = null
+            } else {
+                // Jika Checkbox tidak dicentang, sembunyikan teks password
+                passwordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
+            }
+        }
     }
 }

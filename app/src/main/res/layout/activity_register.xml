@@ -152,12 +152,12 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <CheckBox
-        android:id="@+id/consentVisible"
+        android:id="@+id/passwordVisible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginTop="10dp"
-        android:text="@string/consent"
+        android:text="@string/show_password"
         app:layout_constraintStart_toStartOf="@id/rePasswordEditTextLayout"
         app:layout_constraintTop_toBottomOf="@id/rePasswordEditTextLayout"/>
 
@@ -173,7 +173,7 @@
         android:paddingRight="60dp"
         app:layout_constraintStart_toStartOf="@id/emailEditTextLayout"
         app:layout_constraintEnd_toEndOf="@id/emailEditTextLayout"
-        app:layout_constraintTop_toBottomOf="@id/consentVisible"
+        app:layout_constraintTop_toBottomOf="@id/passwordVisible"
         android:drawableEnd="@drawable/baseline_arrow_forward_24"
         android:background="@drawable/rounded_button"
         />
