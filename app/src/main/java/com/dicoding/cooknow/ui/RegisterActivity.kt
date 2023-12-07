@@ -36,6 +36,8 @@ class RegisterActivity : AppCompatActivity() {
         binding.registerButton.setOnClickListener {
             val email = binding.edtEmailRegister.text.toString()
             val password = binding.edtPasswordRegister.text.toString()
+            val confirmPassword = binding.edtConfirmpasswordRegister.text.toString()
+
 
             // Validasi Email
             if (email.isEmpty()){
@@ -62,6 +64,12 @@ class RegisterActivity : AppCompatActivity() {
             if (password.length < 8){
                 binding.edtPasswordRegister.error = getString(R.string.password_length)
                 binding.edtPasswordRegister.requestFocus()
+                return@setOnClickListener
+            }
+
+            if (!confirmPassword.equals(password)){
+                binding.edtConfirmpasswordRegister.error = getString(R.string.confirm_password_invalid)
+                binding.edtConfirmpasswordRegister.requestFocus()
                 return@setOnClickListener
             }
 
@@ -106,6 +114,7 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun showPassword(){
         val passwordEditText: TextInputEditText = binding.edtPasswordRegister
+        val confirmpasswordEditText: TextInputEditText = binding.edtConfirmpasswordRegister
         val passwordVisibleCheckBox: CheckBox = binding.passwordVisible
 
         passwordVisibleCheckBox.setOnCheckedChangeListener { _, isChecked ->
@@ -113,9 +122,11 @@ class RegisterActivity : AppCompatActivity() {
             if (isChecked) {
                 // Jika Checkbox dicentang, tampilkan teks password
                 passwordEditText.transformationMethod = null
+                confirmpasswordEditText.transformationMethod = null
             } else {
                 // Jika Checkbox tidak dicentang, sembunyikan teks password
                 passwordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
+                confirmpasswordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
             }
         }
     }
