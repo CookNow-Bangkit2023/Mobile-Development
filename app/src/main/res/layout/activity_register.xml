@@ -145,9 +145,10 @@
         app:layout_constraintTop_toBottomOf="@+id/rePasswordTextView">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_confirmpassword_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"/>
+            android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
