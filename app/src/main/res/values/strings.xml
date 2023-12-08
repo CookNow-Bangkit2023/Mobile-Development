@@ -47,4 +47,31 @@
     <string name="content_home">content_home</string>
     <string name="content_add">content_add</string>
     <string name="content_profil">content_profil</string>
+
+    <!-- HomeMenu -->
+    <string name="top_menu">Top Menu</string>
+    <string name="recommendation">Recommendation</string>
+    <string name="search">Search</string>
+    <string name="top_ingredients">Top Ingredients</string>
+    <string name="beef">Beef</string>
+    <string name="chicken">Chicken</string>
+    <string name="pork">Pork</string>
+    <string name="lamb">Lamb</string>
+    <string name="fish">Fish</string>
+    <string name="turkey">Turkey</string>
+    <string name="vension">Vension</string>
+    <string name="veal">Veal</string>
+    <string name="duck">Duck</string>
+    <string name="rabbit">Rabbit</string>
+    <string name="goat">Goat</string>
+    <string name="spaghetti">Spaghetti</string>
+    <string name="rice">Rice</string>
+    <string name="bread">Bread</string>
+    <string name="potatoes">Potatoes</string>
+    <string name="pasta">Pasta</string>
+    <string name="wheat">Wheat</string>
+    <string name="corn">Corn</string>
+    <string name="oats">Oats</string>
+    <string name="menu">Menu</string>
+
 </resources>

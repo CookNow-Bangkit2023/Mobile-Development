@@ -8,7 +8,7 @@ import com.dicoding.cooknow.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,26 +17,22 @@ class MainActivity : AppCompatActivity() {
         replaceFragment(HomeFragment())
 
         binding.bottomNavigationView.setOnItemSelectedListener {
-
-            when(it.itemId){
+            when (it.itemId) {
                 R.id.home -> replaceFragment(HomeFragment())
                 R.id.add -> replaceFragment(FindRecipesFragment())
                 R.id.profile -> replaceFragment(ProfileFragment())
                 else -> {
-
+                    // Handle other cases if necessary
                 }
             }
             true
         }
-
     }
 
-    private fun replaceFragment(fragment: Fragment){
-
+    private fun replaceFragment(fragment: Fragment) {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.frame_layout, fragment)
         fragmentTransaction.commit()
-
     }
 }

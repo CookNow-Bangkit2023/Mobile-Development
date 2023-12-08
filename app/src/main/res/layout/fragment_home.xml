@@ -1,15 +1,359 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.HomeFragment">
+    android:layout_height="match_parent">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        tools:context=".ui.HomeFragment">
+
+    <!-- Search Bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/outline_search"
+        android:gravity="center_vertical"
+        android:padding="10dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/search"
+            android:layout_marginEnd="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search"
+            android:textSize="14sp"
+            android:textColor="#000000"/>
+    </LinearLayout>
+
+    <!-- Top Ingredients -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text= "Home Fragment"
-        android:textSize="26sp"
-        android:layout_gravity="center"/>
+        android:text="@string/top_ingredients"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:layout_marginTop="18dp"/>
 
-</FrameLayout>
+    <!-- Buttons for Ingredients -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/item_button"
+            android:backgroundTint="@color/white"
+            android:text="@string/beef"
+            android:textSize="11sp"
+            android:textColor="#000000"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/item_button"
+            android:backgroundTint="@color/white"
+            android:text="@string/chicken"
+            android:textSize="11sp"
+            android:textColor="#000000"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/item_button"
+            android:backgroundTint="@color/white"
+            android:text="@string/pork"
+            android:textSize="11sp"
+            android:textColor="#000000"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/item_button"
+            android:backgroundTint="@color/white"
+            android:text="@string/lamb"
+            android:textSize="11sp"
+            android:textColor="#000000"
+            tools:ignore="TouchTargetSizeCheck" />
+    </LinearLayout>
+
+    <!-- Second Row of Ingredient Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/item_button"
+            android:backgroundTint="@color/white"
+            android:text="@string/fish"
+            android:textSize="11sp"
+            android:textColor="#000000"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/item_button"
+            android:backgroundTint="@color/white"
+            android:text="@string/turkey"
+            android:textSize="11sp"
+            android:textColor="#000000"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/item_button"
+            android:backgroundTint="@color/white"
+            android:text="@string/vension"
+            android:textSize="11sp"
+            android:textColor="#000000"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/item_button"
+            android:backgroundTint="@color/white"
+            android:text="@string/veal"
+            android:textSize="11sp"
+            android:textColor="#000000"
+            tools:ignore="TouchTargetSizeCheck" />
+    </LinearLayout>
+
+    <!-- Third Row of Ingredient Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/item_button"
+            android:backgroundTint="@color/white"
+            android:text="@string/duck"
+            android:textSize="11sp"
+            android:textColor="#000000"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/item_button"
+            android:backgroundTint="@color/white"
+            android:text="@string/rabbit"
+            android:textSize="11sp"
+            android:textColor="#000000"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/item_button"
+            android:backgroundTint="@color/white"
+            android:text="@string/goat"
+            android:textSize="11sp"
+            android:textColor="#000000"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/item_button"
+            android:backgroundTint="@color/white"
+            android:text="@string/spaghetti"
+            android:textSize="11sp"
+            android:textColor="#000000"
+            tools:ignore="TouchTargetSizeCheck" />
+    </LinearLayout>
+
+    <!-- Fourth Row of Ingredient Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/item_button"
+            android:backgroundTint="@color/white"
+            android:text="@string/rice"
+            android:textSize="11sp"
+            android:textColor="#000000"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/item_button"
+            android:backgroundTint="@color/white"
+            android:text="@string/bread"
+            android:textSize="11sp"
+            android:textColor="#000000"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/item_button"
+            android:backgroundTint="@color/white"
+            android:text="@string/potatoes"
+            android:textSize="11sp"
+            android:textColor="#000000"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/item_button"
+            android:backgroundTint="@color/white"
+            android:text="@string/pasta"
+            android:textSize="11sp"
+            android:textColor="#000000"
+            tools:ignore="TouchTargetSizeCheck" />
+    </LinearLayout>
+
+    <!-- Fiveth Row of Ingredient Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/item_button"
+            android:backgroundTint="@color/white"
+            android:text="@string/oats"
+            android:textSize="11sp"
+            android:textColor="#000000"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/item_button"
+            android:backgroundTint="@color/white"
+            android:text="@string/corn"
+            android:textSize="11sp"
+            android:textColor="#000000"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/item_button"
+            android:backgroundTint="@color/white"
+            android:text="@string/wheat"
+            android:textSize="11sp"
+            android:textColor="#000000"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <!-- Recommendation -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/recommendation"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Horizontal RecyclerView for Recommendation -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recommendationRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"/>
+
+    <!-- Top Menu -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/top_menu"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Horizontal RecyclerView for Top Menu -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/topMenuRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"/>
+
+    </LinearLayout>
+
+</ScrollView>
