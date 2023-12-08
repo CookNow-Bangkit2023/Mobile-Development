@@ -74,4 +74,29 @@
     <string name="oats">Oats</string>
     <string name="menu">Menu</string>
 
+    <!-- Find Recipes -->
+    <string name="search_ingredients">Search Ingredients</string>
+    <string name="meat">Meat</string>
+    <string name="carbo">Carbo</string>
+    <string name="vegetables">Vegetables</string>
+    <string name="carrots">Carrots</string>
+    <string name="tomatoes">Tomatoes</string>
+    <string name="onions">Onions</string>
+    <string name="spinach">Spinach</string>
+    <string name="cabbage">Cabbage</string>
+    <string name="broccoli">Broccoli</string>
+    <string name="paprika">Paprika</string>
+    <string name="fruits">Fruits</string>
+    <string name="apple">Apple</string>
+    <string name="banana">Banana</string>
+    <string name="orange">Orange</string>
+    <string name="mango">Mango</string>
+    <string name="strawberry">Strawberry</string>
+    <string name="cherry">Cherry</string>
+    <string name="papaya">Papaya</string>
+    <string name="pineapple">Pineapple</string>
+    <string name="find_recipes">Find Recipes</string>
+    <string name="traditional_spare_ribs_baked">Traditional Spare Ribs Baked</string>
+
+
 </resources>
