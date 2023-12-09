@@ -13,9 +13,12 @@
         android:theme="@style/Theme.CookNow"
         tools:targetApi="31">
         <activity
+            android:name=".ui.ListRecipesActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.SplashScreenActivity"
-            android:theme="@style/SplashScreenTheme"
-            android:exported="true" >
+            android:exported="true"
+            android:theme="@style/SplashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,7 +33,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.WelcomeActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".ui.MainActivity"
             android:exported="false" />

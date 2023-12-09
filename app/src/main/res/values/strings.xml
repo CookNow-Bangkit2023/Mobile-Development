@@ -100,5 +100,9 @@
     <string name="find_recipes">Find Recipes</string>
     <string name="traditional_spare_ribs_baked">Traditional Spare Ribs Baked</string>
 
+    <!-- List Recipes -->
+    <string name="list_recipes">List Recipes</string>
+    <string name="rating">Rating</string>
+
 
 </resources>
