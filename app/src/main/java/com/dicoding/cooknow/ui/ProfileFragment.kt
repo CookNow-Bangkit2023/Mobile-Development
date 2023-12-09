@@ -6,15 +6,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.dicoding.cooknow.R
+import android.widget.Toast
 import com.dicoding.cooknow.databinding.FragmentProfileBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class ProfileFragment : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
     private lateinit var auth: FirebaseAuth
+    private var db = Firebase.firestore
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -45,9 +48,19 @@ class ProfileFragment : Fragment() {
     }
 
     private fun showIdentity(){
+        val nameText = binding.usernameTitle
         val emailText = binding.card
-        val emailUser = auth.currentUser?.email
 
-        emailText.text = emailUser
+        val userID =  auth.currentUser!!.uid
+        val ref = db.collection("users").document(userID)
+        ref.get().addOnSuccessListener {
+            if (it != null){
+                val name = it.data?.get("name")?.toString()
+                val email = it.data?.get("email")?.toString()
+
+                nameText.text = name
+                emailText.text = email
+            }
+        }
     }
 }

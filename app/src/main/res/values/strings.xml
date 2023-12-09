@@ -32,6 +32,8 @@
     <string name="register">Sign Up</string>
     <string name="name">Name</string>
     <string name="name_placeholder">Enter Name</string>
+    <string name="name_empty">Name cannot be empty</string>
+    <string name="name_length">Name at least 4 characters</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="confirm_password_invalid">Password not match</string>
     <string name="retype_password_placeholder">Retype Password</string>

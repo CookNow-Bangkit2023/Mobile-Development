@@ -10,6 +10,7 @@ import android.text.method.LinkMovementMethod
 import android.text.method.PasswordTransformationMethod
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
+import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.widget.CheckBox
@@ -18,11 +19,18 @@ import com.dicoding.cooknow.R
 import com.dicoding.cooknow.databinding.ActivityRegisterBinding
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var auth: FirebaseAuth
+    private var db = Firebase.firestore
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
@@ -34,10 +42,24 @@ class RegisterActivity : AppCompatActivity() {
         showPassword()
 
         binding.registerButton.setOnClickListener {
+            val name = binding.edtNameRegister.text.toString()
             val email = binding.edtEmailRegister.text.toString()
             val password = binding.edtPasswordRegister.text.toString()
             val confirmPassword = binding.edtConfirmpasswordRegister.text.toString()
 
+            // Validasi Name
+            if (name.isEmpty()){
+                binding.edtNameRegister.error = getString(R.string.name_empty)
+                binding.edtNameRegister.requestFocus()
+                return@setOnClickListener
+            }
+
+            // Validasi panjang name
+            if (name.length < 4){
+                binding.edtNameRegister.error = getString(R.string.name_length)
+                binding.edtNameRegister.requestFocus()
+                return@setOnClickListener
+            }
 
             // Validasi Email
             if (email.isEmpty()){
@@ -73,15 +95,27 @@ class RegisterActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            RegisterFirebase(email, password)
+            RegisterFirebase(name, email, password)
         }
     }
 
-    private fun RegisterFirebase(email: String, password: String){
+    private fun RegisterFirebase(name: String, email: String, password: String){
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this){
                 if (it.isSuccessful){
                     Toast.makeText(this, getString(R.string.register_success), Toast.LENGTH_SHORT).show()
+                    val user = hashMapOf(
+                        "name" to name,
+                        "email" to email
+                    )
+                    val userID = auth.currentUser!!.uid
+                    db.collection("users").document(userID).set(user)
+                        .addOnSuccessListener {
+                            Log.d(TAG, "onSuccess: user Profile is created for : $userID")
+                        }
+                        .addOnFailureListener { e ->
+                            Log.w(TAG, "onFailure: Error created Profile", e)
+                        }
                     val intent = Intent(this, LoginActivity::class.java)
                     startActivity(intent)
                     finish()
@@ -130,4 +164,9 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
     }
+
+    companion object {
+        private const val TAG = "RegisterActivity"
+    }
+
 }
