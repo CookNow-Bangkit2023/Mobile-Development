@@ -1,10 +1,13 @@
-package com.dicoding.cooknow.ui
+package com.dicoding.cooknow.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.dicoding.cooknow.R
 import com.dicoding.cooknow.databinding.ActivityMainBinding
+import com.dicoding.cooknow.ui.findRecipes.FindRecipesFragment
+import com.dicoding.cooknow.ui.home.HomeFragment
+import com.dicoding.cooknow.ui.profile.ProfileFragment
 
 class MainActivity : AppCompatActivity() {
 

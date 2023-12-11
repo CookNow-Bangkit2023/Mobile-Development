@@ -1,14 +1,15 @@
-// HomeFragment.kt
-package com.dicoding.cooknow.ui
+package com.dicoding.cooknow.ui.home
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dicoding.cooknow.R
+import com.dicoding.cooknow.ui.listRecipes.Food
 
 class HomeFragment : Fragment() {
 
@@ -31,7 +32,7 @@ class HomeFragment : Fragment() {
             // ...Tambahkan data makanan lainnya
         )
 
-        val recommendationAdapter = FoodAdapter(recommendationData)
+        val recommendationAdapter = FoodAdapter(recommendationData, requireContext())
         recommendationRecyclerView.adapter = recommendationAdapter
 
         // RecyclerView for Top Menu
@@ -47,7 +48,7 @@ class HomeFragment : Fragment() {
             // ...Tambahkan data menu lainnya
         )
 
-        val topMenuAdapter = FoodAdapter(topMenuData)
+        val topMenuAdapter = FoodAdapter(topMenuData, requireContext())
         topMenuRecyclerView.adapter = topMenuAdapter
 
         return view

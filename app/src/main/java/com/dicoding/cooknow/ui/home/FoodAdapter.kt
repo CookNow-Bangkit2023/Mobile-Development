@@ -1,5 +1,7 @@
-package com.dicoding.cooknow.ui
+package com.dicoding.cooknow.ui.home
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,8 +9,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.dicoding.cooknow.R
+import com.dicoding.cooknow.ui.listRecipes.Food
+import com.dicoding.cooknow.ui.detailRecipes.DetailRecipesActivity
 
-class FoodAdapter(private val foodList: List<Food>) :
+class FoodAdapter(private val foodList: List<Food>, private val context: Context) :
     RecyclerView.Adapter<FoodAdapter.FoodViewHolder>() {
 
     class FoodViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -29,5 +33,12 @@ class FoodAdapter(private val foodList: List<Food>) :
         val food = foodList[position]
         holder.foodImageView.setImageResource(food.foodImage)
         holder.foodNameTv.text = food.foodName
+
+        holder.itemView.setOnClickListener {
+            val intent = Intent(context, DetailRecipesActivity::class.java)
+            // Jika Anda perlu mengirim data ke DetailRecipesActivity, tambahkan di sini
+            // intent.putExtra("KEY", value)
+            context.startActivity(intent)
+        }
     }
 }

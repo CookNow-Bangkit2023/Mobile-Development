@@ -1,4 +1,4 @@
-package com.dicoding.cooknow.ui
+package com.dicoding.cooknow.ui.login
 
 import android.content.Intent
 import android.graphics.Color
@@ -16,6 +16,8 @@ import android.widget.CheckBox
 import android.widget.Toast
 import com.dicoding.cooknow.R
 import com.dicoding.cooknow.databinding.ActivityLoginBinding
+import com.dicoding.cooknow.ui.register.RegisterActivity
+import com.dicoding.cooknow.ui.main.MainActivity
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 

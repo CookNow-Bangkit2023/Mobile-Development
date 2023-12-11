@@ -1,12 +1,13 @@
-package com.dicoding.cooknow.ui
+package com.dicoding.cooknow.ui.splashscreen
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import com.dicoding.cooknow.R
 import com.dicoding.cooknow.databinding.ActivitySplashScreenBinding
+import com.dicoding.cooknow.ui.main.MainActivity
+import com.dicoding.cooknow.ui.welcome.WelcomeActivity
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 

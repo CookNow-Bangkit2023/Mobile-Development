@@ -1,4 +1,4 @@
-package com.dicoding.cooknow.ui
+package com.dicoding.cooknow.ui.findRecipes
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.dicoding.cooknow.R
+import com.dicoding.cooknow.ui.listRecipes.ListRecipesActivity
 
 class FindRecipesFragment : Fragment() {
 

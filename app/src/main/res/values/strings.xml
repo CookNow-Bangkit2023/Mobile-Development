@@ -103,6 +103,15 @@
     <!-- List Recipes -->
     <string name="list_recipes">List Recipes</string>
     <string name="rating">Rating</string>
+    <string name="step">Step</string>
+    <string name="description_text">Lorem Ipsum tempor incididunt ut labore et dolore,in voluptate velit esse cillum dolore eu fugiat nulla pariatur?</string>
+    <string name="netto">100g</string>
+    <string name="ingredient">Ingredient</string>
+    <string name="tab_1">Ingredient</string>
+    <string name="tab_2">Procedure</string>
+
+    <!-- Detail Recipes -->
+    <string name="detail_recipe">Detail Recipe</string>
 
 
 </resources>
