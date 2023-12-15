@@ -53,7 +53,7 @@
     <!-- HomeMenu -->
     <string name="top_menu">Top Menu</string>
     <string name="recommendation">Recommendation</string>
-    <string name="search">Search</string>
+    <string name="search_recipes">Search Recipes</string>
     <string name="top_ingredients">Top Ingredients</string>
     <string name="beef">Beef</string>
     <string name="chicken">Chicken</string>
