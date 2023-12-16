@@ -18,21 +18,16 @@
 
         <TextView
             android:id="@+id/tv_ingredient"
-            android:layout_width="wrap_content"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
+            android:maxLines="2"
+            android:ellipsize="end"
             android:text="@string/ingredient"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="#000000"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/netto"
-            android:textSize="16sp"
-            android:textColor="#A9A9A9"
-            android:layout_marginStart="210dp"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

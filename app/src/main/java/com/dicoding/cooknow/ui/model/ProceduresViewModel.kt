@@ -6,22 +6,21 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dicoding.cooknow.data.api.ApiConfig
 import com.dicoding.cooknow.data.response.DetailRecipesResponse
-import com.dicoding.cooknow.ui.detailRecipes.DetailViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class IngredientsViewModel: ViewModel() {
-    private val _ingredientsList = MutableLiveData<List<String>>()
-    val ingredientsList: LiveData<List<String>> = _ingredientsList
+class ProceduresViewModel: ViewModel() {
+    private val _proceduresList = MutableLiveData<List<String>>()
+    val proceduresList: LiveData<List<String>> = _proceduresList
 
-    private val _ingredientCount = MutableLiveData<Int>()
-    val ingredientCount: LiveData<Int> = _ingredientCount
+    private val _procedureCount = MutableLiveData<Int>()
+    val procedureCount: LiveData<Int> = _procedureCount
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    fun getIngredients(id: Int) {
+    fun getProcedure(id: Int) {
         _isLoading.postValue(true)
         val response = ApiConfig.getApiService().getDetailRecipes(id)
         response.enqueue(object : Callback<DetailRecipesResponse> {
@@ -31,15 +30,15 @@ class IngredientsViewModel: ViewModel() {
             ) {
                 _isLoading.value = false
                 if (response.isSuccessful) {
-                    val ingredientsList = response.body()?.resultRecipe?.ingredients
-                    if (!ingredientsList.isNullOrBlank()) {
+                    val procedureList = response.body()?.resultRecipe?.steps
+                    if (!procedureList.isNullOrBlank()) {
                         // Convert the string representation of a list into an actual list
-                        val ingredients = parseIngredientsList(ingredientsList)
-                        _ingredientsList.value = ingredients
-                        _ingredientCount.value = ingredients.size
+                        val procedures = parseProceduresList(procedureList)
+                        _proceduresList.value = procedures
+                        _procedureCount.value = procedures.size
                     } else {
-                        _ingredientsList.value = emptyList()
-                        _ingredientCount.value = 0
+                        _proceduresList.value = emptyList()
+                        _procedureCount.value = 0
                     }
                 } else {
                     Log.e(TAG, "onFailure: ${response.message()}")
@@ -53,15 +52,16 @@ class IngredientsViewModel: ViewModel() {
         })
     }
 
-    private fun parseIngredientsList(ingredientsString: String): List<String> {
-        // Remove square brackets and single quotes from the string
-        val cleanedString = ingredientsString.replace("[", "").replace("]", "").replace("'", "")
+    private fun parseProceduresList(procedureString: String): List<String> {
+        // Use regex to match content inside single quotes
+        val regex = Regex("'(.*?)'")
+        val matches = regex.findAll(procedureString)
 
-        // Split the cleaned string into a list of strings
-        return cleanedString.split(",").map { it.trim() }
+        // Extract matched content and map it to a list of strings
+        return matches.map { it.groupValues[1] }.toList()
     }
 
     companion object {
-        private const val TAG = "IngredientsViewModel"
+        private const val TAG = "ProcedureViewModel"
     }
 }

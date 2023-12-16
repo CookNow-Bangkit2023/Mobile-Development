@@ -18,9 +18,20 @@ import com.dicoding.cooknow.ui.model.IngredientsViewModel
 class IngredientFragment : Fragment() {
 
     // Deklarasi list untuk menyimpan data bahan
-    private lateinit var ingredientList: ArrayList<String>
     private lateinit var ingredientsViewModel: IngredientsViewModel
     private lateinit var binding: FragmentIngredientBinding
+
+    companion object {
+        private const val ARG_RECIPE_ID = "recipe_id"
+
+        fun newInstance(recipeId: Int): IngredientFragment {
+            val fragment = IngredientFragment()
+            val args = Bundle()
+            args.putInt(ARG_RECIPE_ID, recipeId)
+            fragment.arguments = args
+            return fragment
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,6 +44,9 @@ class IngredientFragment : Fragment() {
 
         ingredientsViewModel = ViewModelProvider(this)[IngredientsViewModel::class.java]
 
+        val recipeId = arguments?.getInt(ARG_RECIPE_ID, -1) ?: -1
+        ingredientsViewModel.getIngredients(recipeId)
+
         val adapter = IngredientAdapter(emptyList())
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
@@ -42,6 +56,8 @@ class IngredientFragment : Fragment() {
             // For example, you can use this list to populate a RecyclerView or other UI elements
             adapter.updateData(ingredients)
         }
+
+        ingredientsViewModel.getIngredients(recipeId)
 
         return view
     }

@@ -1,25 +1,22 @@
 package com.dicoding.cooknow.ui.detailRecipes
 
+import SectionPagerAdapter
 import android.graphics.Color
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
 import com.dicoding.cooknow.R
 import com.dicoding.cooknow.databinding.ActivityDetailRecipesBinding
-import com.dicoding.cooknow.ui.home.FoodAdapter
-import com.dicoding.cooknow.ui.home.HomeViewModel
-import com.dicoding.cooknow.ui.listRecipes.Food
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
+import com.google.android.material.tabs.TabLayoutMediator
 
 class DetailRecipesActivity : AppCompatActivity() {
     private var tabLayout: TabLayout? = null
-    private var viewPager: ViewPager? = null
+    private var viewPager: ViewPager2? = null
 
     private lateinit var detailViewModel: DetailViewModel
     private lateinit var binding: ActivityDetailRecipesBinding
@@ -45,8 +42,12 @@ class DetailRecipesActivity : AppCompatActivity() {
         detailViewModel.detailRecipes.observe(this) { recipe ->
             if (recipe != null) {
                 binding.tvListName.text = recipe.resultRecipe?.name ?: ""
-                setupViewPager(viewPager)
-                tabLayout?.setupWithViewPager(viewPager)
+                setupViewPager(viewPager!!)
+                val tabTitles = arrayOf("Ingredient", "Procedure")
+                TabLayoutMediator(tabLayout!!, viewPager!!) { tab, position ->
+                    tab.text = tabTitles[position]
+                }.attach()
+
                 tabLayout?.addOnTabSelectedListener(object : OnTabSelectedListener {
                     override fun onTabSelected(tab: TabLayout.Tab) {
                         // Mengubah warna teks untuk tab yang dipilih
@@ -75,15 +76,11 @@ class DetailRecipesActivity : AppCompatActivity() {
         detailViewModel.detailRecipes(recipe)
     }
 
-    private fun setupViewPager(viewPager: ViewPager?) {
-        viewPager?.let {
-            val adapter = SectionPagerAdapter(
-                supportFragmentManager,
-                FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
-            )
-            adapter.addFragment(IngredientFragment(), "Ingredient")
-            adapter.addFragment(ProcedureFragment(), "Procedure")
-            it.adapter = adapter
-        }
+    private fun setupViewPager(viewPager: ViewPager2) {
+        val adapter = SectionPagerAdapter(this)
+        val recipeId = intent.getIntExtra(EXTRA_RECIPE_ID, -1)
+        adapter.addFragment(IngredientFragment.newInstance(recipeId), "Ingredient")
+        adapter.addFragment(ProcedureFragment.newInstance(recipeId), "Procedure")
+        viewPager.adapter = adapter
     }
 }
