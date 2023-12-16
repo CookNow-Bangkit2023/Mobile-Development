@@ -26,8 +26,10 @@
 
         <TextView
             android:id="@+id/tv_meal_name"
-            android:layout_width="wrap_content"
+            android:layout_width="210dp"
             android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:ellipsize="end"
             android:layout_marginStart="10dp"
             android:text="@string/traditional_spare_ribs_baked"
             android:textColor="@color/white"
@@ -35,7 +37,7 @@
             app:layout_constraintTop_toBottomOf="@id/img_list"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="150dp"/>
+            android:layout_marginTop="135dp"/>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
 

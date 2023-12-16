@@ -6,38 +6,53 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dicoding.cooknow.R
+import com.dicoding.cooknow.databinding.FragmentHomeBinding
+import com.dicoding.cooknow.databinding.FragmentIngredientBinding
+import com.dicoding.cooknow.ui.home.HomeViewModel
+import com.dicoding.cooknow.ui.model.IngredientsViewModel
 
 class IngredientFragment : Fragment() {
 
     // Deklarasi list untuk menyimpan data bahan
     private lateinit var ingredientList: ArrayList<String>
+    private lateinit var ingredientsViewModel: IngredientsViewModel
+    private lateinit var binding: FragmentIngredientBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_ingredient, container, false)
+        binding = FragmentIngredientBinding.inflate(inflater, container, false)
+        val view = binding.root
         val recyclerView: RecyclerView = view.findViewById(R.id.rv_ingredient)
 
-        // Inisialisasi ingredientList dan tambahkan data bahan contoh
-        ingredientList = ArrayList()
-        ingredientList.add("Ingredient 1")
-        ingredientList.add("Ingredient 2")
-        ingredientList.add("Ingredient 3")
+        ingredientsViewModel = ViewModelProvider(this)[IngredientsViewModel::class.java]
 
-        val adapter = IngredientAdapter(ingredientList)
+        val adapter = IngredientAdapter(emptyList())
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
+
+        ingredientsViewModel.ingredientsList.observe(viewLifecycleOwner) { ingredients ->
+            // Update your UI with the list of ingredients
+            // For example, you can use this list to populate a RecyclerView or other UI elements
+            adapter.updateData(ingredients)
+        }
 
         return view
     }
 
-    class IngredientAdapter(private val ingredients: List<String>) :
+    class IngredientAdapter(private var ingredients: List<String>) :
         RecyclerView.Adapter<IngredientAdapter.IngredientViewHolder>() {
+
+        fun updateData(newData: List<String>) {
+            ingredients = newData
+            notifyDataSetChanged()
+        }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IngredientViewHolder {
             val view = LayoutInflater.from(parent.context)

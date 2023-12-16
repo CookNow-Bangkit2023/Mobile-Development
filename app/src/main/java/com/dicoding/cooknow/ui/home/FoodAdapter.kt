@@ -7,12 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.dicoding.cooknow.R
+import com.dicoding.cooknow.data.response.RecipesResponseItem
 import com.dicoding.cooknow.ui.listRecipes.Food
 import com.dicoding.cooknow.ui.detailRecipes.DetailRecipesActivity
 
-class FoodAdapter(private val foodList: List<Food>, private val context: Context) :
+class FoodAdapter(private val foodList: List<RecipesResponseItem>, private val context: Context) :
     RecyclerView.Adapter<FoodAdapter.FoodViewHolder>() {
 
     class FoodViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -30,14 +32,14 @@ class FoodAdapter(private val foodList: List<Food>, private val context: Context
     }
 
     override fun onBindViewHolder(holder: FoodViewHolder, position: Int) {
-        val food = foodList[position]
-        holder.foodImageView.setImageResource(food.foodImage)
-        holder.foodNameTv.text = food.foodName
+        val recipe  = foodList[position]
+        holder.foodImageView.setImageResource(R.drawable.img)
+        holder.foodNameTv.text = recipe.name
 
         holder.itemView.setOnClickListener {
-            val intent = Intent(context, DetailRecipesActivity::class.java)
-            // Jika Anda perlu mengirim data ke DetailRecipesActivity, tambahkan di sini
-            // intent.putExtra("KEY", value)
+            val intent = Intent(context, DetailRecipesActivity::class.java).apply {
+                this.putExtra(DetailRecipesActivity.EXTRA_RECIPE_ID, recipe.id)
+            }
             context.startActivity(intent)
         }
     }

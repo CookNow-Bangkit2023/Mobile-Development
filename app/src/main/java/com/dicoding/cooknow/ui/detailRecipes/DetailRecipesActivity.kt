@@ -7,8 +7,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.dicoding.cooknow.R
+import com.dicoding.cooknow.databinding.ActivityDetailRecipesBinding
+import com.dicoding.cooknow.ui.home.FoodAdapter
+import com.dicoding.cooknow.ui.home.HomeViewModel
+import com.dicoding.cooknow.ui.listRecipes.Food
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 
@@ -16,73 +21,69 @@ class DetailRecipesActivity : AppCompatActivity() {
     private var tabLayout: TabLayout? = null
     private var viewPager: ViewPager? = null
 
+    private lateinit var detailViewModel: DetailViewModel
+    private lateinit var binding: ActivityDetailRecipesBinding
+
+    companion object {
+        const val EXTRA_RECIPE_ID = "recipe_id"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail_recipes)
-        tabLayout = findViewById(R.id.tabs)
+        binding = ActivityDetailRecipesBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        tabLayout = binding.tabs
         viewPager = findViewById(R.id.view_pager)
 
         // Set warna teks secara langsung pada tab pertama kali dimuat
         tabLayout?.setTabTextColors(Color.BLACK, Color.BLACK)
 
-        setupViewPager(viewPager)
-        tabLayout?.setupWithViewPager(viewPager)
-        tabLayout?.addOnTabSelectedListener(object : OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab) {
-                // Mengubah warna teks untuk tab yang dipilih
-                tabLayout?.setTabTextColors(Color.BLACK, Color.parseColor("#129575"))
+        // Set data
+        detailViewModel = ViewModelProvider(this)[DetailViewModel::class.java]
+        val recipe = intent.getIntExtra(EXTRA_RECIPE_ID, -1)
 
-                // Menampilkan fragment sesuai dengan posisi tab yang dipilih
-                viewPager?.currentItem = tab.position
+        detailViewModel.detailRecipes.observe(this) { recipe ->
+            if (recipe != null) {
+                binding.tvListName.text = recipe.resultRecipe?.name ?: ""
+                setupViewPager(viewPager)
+                tabLayout?.setupWithViewPager(viewPager)
+                tabLayout?.addOnTabSelectedListener(object : OnTabSelectedListener {
+                    override fun onTabSelected(tab: TabLayout.Tab) {
+                        // Mengubah warna teks untuk tab yang dipilih
+                        tabLayout?.setTabTextColors(Color.BLACK, Color.parseColor("#129575"))
+
+                        // Menampilkan fragment sesuai dengan posisi tab yang dipilih
+                        viewPager?.currentItem = tab.position
+                    }
+
+                    override fun onTabUnselected(tab: TabLayout.Tab) {
+                        // Mengembalikan warna teks untuk tab yang tidak dipilih
+                        tabLayout?.setTabTextColors(Color.BLACK, Color.BLACK)
+                    }
+
+                    override fun onTabReselected(tab: TabLayout.Tab) {
+                        // Aksi jika tab sudah dipilih kembali
+                    }
+                })
+
+                val imageBack: ImageView = findViewById(R.id.imageBack)
+                imageBack.setOnClickListener {
+                    onBackPressed() // Ganti dengan aksi yang ingin Anda lakukan
+                }
             }
-
-            override fun onTabUnselected(tab: TabLayout.Tab) {
-                // Mengembalikan warna teks untuk tab yang tidak dipilih
-                tabLayout?.setTabTextColors(Color.BLACK, Color.BLACK)
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab) {
-                // Aksi jika tab sudah dipilih kembali
-            }
-        })
-
-        val imageBack: ImageView = findViewById(R.id.imageBack)
-        imageBack.setOnClickListener {
-            onBackPressed() // Ganti dengan aksi yang ingin Anda lakukan
         }
+        detailViewModel.detailRecipes(recipe)
     }
 
     private fun setupViewPager(viewPager: ViewPager?) {
         viewPager?.let {
-            val adapter = ViewPagerAdapter(
-                supportFragmentManager
+            val adapter = SectionPagerAdapter(
+                supportFragmentManager,
+                FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
             )
             adapter.addFragment(IngredientFragment(), "Ingredient")
             adapter.addFragment(ProcedureFragment(), "Procedure")
             it.adapter = adapter
-        }
-    }
-
-    internal class ViewPagerAdapter(manager: FragmentManager) :
-        FragmentPagerAdapter(manager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
-        private val mFragmentList: MutableList<Fragment> = ArrayList()
-        private val mFragmentTitleList: MutableList<String> = ArrayList()
-
-        override fun getItem(position: Int): Fragment {
-            return mFragmentList[position]
-        }
-
-        override fun getCount(): Int {
-            return mFragmentList.size
-        }
-
-        fun addFragment(fragment: Fragment, title: String) {
-            mFragmentList.add(fragment)
-            mFragmentTitleList.add(title)
-        }
-
-        override fun getPageTitle(position: Int): CharSequence? {
-            return mFragmentTitleList[position]
         }
     }
 }
