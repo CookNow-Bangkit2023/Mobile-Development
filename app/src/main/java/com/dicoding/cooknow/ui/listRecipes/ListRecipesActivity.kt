@@ -15,6 +15,10 @@ class ListRecipesActivity : AppCompatActivity(), RecipeItemClickListener {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: RecipesAdapter
 
+    companion object {
+        const val EXTRA_LIST_ID = "recipe_id"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_recipes)
@@ -23,10 +27,12 @@ class ListRecipesActivity : AppCompatActivity(), RecipeItemClickListener {
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        val recipes = intent.getStringArrayListExtra("RECIPES_LIST")
+        val recipeList = intent.getSerializableExtra(ListRecipesActivity.EXTRA_LIST_ID) as? List<Pair<Int, String>>
 
-        if (!recipes.isNullOrEmpty()) {
-            adapter = RecipesAdapter(recipes, this)
+
+        if (!recipeList.isNullOrEmpty()) {
+            val adaptedRecipes = recipeList.map { it } // Keep existing id and name pairs
+            adapter = RecipesAdapter(adaptedRecipes, this)
             recyclerView.adapter = adapter
         }
 

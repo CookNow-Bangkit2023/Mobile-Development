@@ -9,25 +9,29 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.GridLayout
 import androidx.fragment.app.Fragment
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.VolleyError
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.Volley
+import androidx.lifecycle.ViewModelProvider
 import com.dicoding.cooknow.R
 import com.dicoding.cooknow.data.DataUtils
+import com.dicoding.cooknow.ui.home.HomeViewModel
 import com.dicoding.cooknow.ui.listRecipes.ListRecipesActivity
-import org.json.JSONException
+import com.google.firebase.auth.FirebaseAuth
+import org.json.JSONArray
 import org.json.JSONObject
 
 class FindRecipesFragment : Fragment() {
     private val selectedIngredients = mutableListOf<String>()
+    private lateinit var findRecipesViewModel: FindRecipesViewModel
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_find_recipes, container, false)
+        findRecipesViewModel = ViewModelProvider(this)[FindRecipesViewModel::class.java]
+
+        auth = FirebaseAuth.getInstance()
+
         createButtons(view)
         setupFindRecipeButton(view)
         return view
@@ -82,54 +86,27 @@ class FindRecipesFragment : Fragment() {
 
     private fun setupFindRecipeButton(view: View) {
         val findRecipeButton: Button = view.findViewById(R.id.recipesButton)
+        val userID =  auth.currentUser!!.uid
 
         findRecipeButton.setOnClickListener {
             Log.d("Button_Clicked", "Find Recipe button clicked")
-            sendIngredientsToApi(selectedIngredients)
-        }
-    }
+            findRecipesViewModel.addIngredients(selectedIngredients, userID)
+            findRecipesViewModel.findRecipes.observe(viewLifecycleOwner) { recipes ->
+                val validRecipes = recipes?.predictRecipesResponse?.filterNotNull()
 
-    private fun sendIngredientsToApi(ingredients: List<String>) {
-        val apiUrl = "https://cook-book-now-fkvfn6mtna-uc.a.run.app/api/predict"
-        val userId = "IsAY7xHrm2UgqlyM7e0yyyL58hn2"
+                val recipeList = ArrayList<Pair<Int, String>>()
 
-        val jsonObject = JSONObject()
-        jsonObject.put("ingres", ingredients)
-        jsonObject.put("user_id", userId)
+                validRecipes?.forEach { recipe ->
+                    val id = recipe.id ?: return@forEach
+                    val name = recipe.name ?: return@forEach
+                    recipeList.add(Pair(id, name))
+                }
 
-        val requestQueue = Volley.newRequestQueue(requireContext())
-        val jsonObjectRequest = JsonObjectRequest(
-            Request.Method.POST, apiUrl, jsonObject,
-            Response.Listener { response ->
-                handleApiResponse(response)
-            },
-            Response.ErrorListener { error ->
-                handleApiError(error)
-            })
+                val intent = Intent(activity, ListRecipesActivity::class.java)
+                intent.putExtra(ListRecipesActivity.EXTRA_LIST_ID, recipeList)
+                startActivity(intent)
 
-        requestQueue.add(jsonObjectRequest)
-    }
-
-    private fun handleApiResponse(response: JSONObject) {
-        val recipes = mutableListOf<String>()
-
-        try {
-            val jsonArray = response.getJSONArray("recipes")
-            for (i in 0 until jsonArray.length()) {
-                recipes.add(jsonArray.getString(i))
             }
-
-            val intent = Intent(activity, ListRecipesActivity::class.java)
-            intent.putStringArrayListExtra("RECIPES_LIST", ArrayList(recipes))
-            startActivity(intent)
-        } catch (e: JSONException) {
-            Log.e("JSON_Parse_Error", e.toString())
-            // Tindakan penanganan kesalahan jika parsing JSON gagal
         }
-    }
-
-    private fun handleApiError(error: VolleyError) {
-        Log.e("API_Error", error.toString())
-        // Tangani error di sini jika diperlukan
     }
 }
