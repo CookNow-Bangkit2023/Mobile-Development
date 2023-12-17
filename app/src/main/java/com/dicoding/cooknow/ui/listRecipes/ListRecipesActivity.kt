@@ -13,7 +13,6 @@ import com.dicoding.cooknow.ui.detailRecipes.RecipeItemClickListener
 class ListRecipesActivity : AppCompatActivity(), RecipeItemClickListener {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var recipesList: MutableList<String>
     private lateinit var adapter: RecipesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,14 +23,12 @@ class ListRecipesActivity : AppCompatActivity(), RecipeItemClickListener {
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        recipesList = ArrayList()
-        recipesList.add("Resep 1")
-        recipesList.add("Resep 2")
-        recipesList.add("Resep 3")
-        // Add recipes as needed
+        val recipes = intent.getStringArrayListExtra("RECIPES_LIST")
 
-        adapter = RecipesAdapter(recipesList, this)
-        recyclerView.adapter = adapter
+        if (!recipes.isNullOrEmpty()) {
+            adapter = RecipesAdapter(recipes, this)
+            recyclerView.adapter = adapter
+        }
 
         val imageBack: ImageView = findViewById(R.id.imageBack)
         imageBack.setOnClickListener {
