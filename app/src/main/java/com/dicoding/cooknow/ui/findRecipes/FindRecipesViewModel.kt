@@ -24,7 +24,6 @@ class FindRecipesViewModel() : ViewModel() {
             "user_id" to user_uid
         )
 
-
         val response = ApiConfig.getApiService().postIngredients(requestMap)
         response.enqueue(object : Callback<List<PredictRecipesResponseItem>> {
             override fun onResponse(

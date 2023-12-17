@@ -4,10 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.dicoding.cooknow.data.RecipesRepository
 import com.dicoding.cooknow.data.api.ApiConfig
-import com.dicoding.cooknow.data.response.RecipesResponse
 import com.dicoding.cooknow.data.response.RecipesResponseItem
 import retrofit2.Call
 import retrofit2.Callback
