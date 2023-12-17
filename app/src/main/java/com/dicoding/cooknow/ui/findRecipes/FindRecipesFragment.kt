@@ -19,7 +19,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 
 class FindRecipesFragment : Fragment() {
-    private val selectedIngredients = mutableListOf<String>()
+    private val selectedIngredients = mutableListOf("salt", "pepper", "water", "sugar")
     private lateinit var findRecipesViewModel: FindRecipesViewModel
     private lateinit var auth: FirebaseAuth
 
@@ -79,6 +79,7 @@ class FindRecipesFragment : Fragment() {
             selectedIngredients.remove(ingredient)
             button.setBackgroundResource(R.drawable.item_button)
         } else {
+            Log.e("FindRecipes","Find Recipes $selectedIngredients")
             selectedIngredients.add(ingredient)
             button.setBackgroundResource(R.drawable.after_click)
         }
@@ -92,7 +93,7 @@ class FindRecipesFragment : Fragment() {
             Log.d("Button_Clicked", "Find Recipe button clicked")
             findRecipesViewModel.addIngredients(selectedIngredients, userID)
             findRecipesViewModel.findRecipes.observe(viewLifecycleOwner) { recipes ->
-                val validRecipes = recipes?.predictRecipesResponse?.filterNotNull()
+                val validRecipes = recipes?.filterNotNull()
 
                 val recipeList = ArrayList<Pair<Int, String>>()
 
@@ -105,7 +106,6 @@ class FindRecipesFragment : Fragment() {
                 val intent = Intent(activity, ListRecipesActivity::class.java)
                 intent.putExtra(ListRecipesActivity.EXTRA_LIST_ID, recipeList)
                 startActivity(intent)
-
             }
         }
     }

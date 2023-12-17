@@ -5,31 +5,31 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dicoding.cooknow.data.api.ApiConfig
-import com.dicoding.cooknow.data.response.PredictRecipesResponse
+import com.dicoding.cooknow.data.response.PredictRecipesResponseItem
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class FindRecipesViewModel() : ViewModel() {
-    private val _findRecipes = MutableLiveData<PredictRecipesResponse?>()
-    val findRecipes: LiveData<PredictRecipesResponse?> = _findRecipes
+    private val _findRecipes = MutableLiveData<List<PredictRecipesResponseItem>?>()
+    val findRecipes: LiveData<List<PredictRecipesResponseItem>?> = _findRecipes
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
     fun addIngredients(ingredients: List<String>, user_uid: String){
-        val ingredientsString = ingredients.joinToString(",")
-
-        val requestMap: Map<String, String> = mapOf(
-            "ingres" to ingredientsString,
+        val requestMap = hashMapOf(
+            "ingres" to ingredients,
             "user_id" to user_uid
         )
 
+
         val response = ApiConfig.getApiService().postIngredients(requestMap)
-        response.enqueue(object : Callback<PredictRecipesResponse> {
+        response.enqueue(object : Callback<List<PredictRecipesResponseItem>> {
             override fun onResponse(
-                call: Call<PredictRecipesResponse>,
-                response: Response<PredictRecipesResponse>
+                call: Call<List<PredictRecipesResponseItem>>,
+                response: Response<List<PredictRecipesResponseItem>>
             ) {
                 _isLoading.value = false
                 if (response.isSuccessful) {
@@ -40,7 +40,7 @@ class FindRecipesViewModel() : ViewModel() {
                 }
             }
 
-            override fun onFailure(call: Call<PredictRecipesResponse>, t: Throwable) {
+            override fun onFailure(call: Call<List<PredictRecipesResponseItem>>, t: Throwable) {
                 _isLoading.value = false
                 Log.e(TAG, "onFailure: ${t.message}")
             }
