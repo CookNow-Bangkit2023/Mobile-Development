@@ -27,6 +27,19 @@ class HomeFragment : Fragment() {
         val view = binding.root
         homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
 
+
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        homeViewModel.findRecipes()
+
+        homeViewModel.isLoading.observe(viewLifecycleOwner){
+            showLoading(it)
+        }
+
         // RecyclerView for Top Menu
         val topMenuRecyclerView: RecyclerView = view.findViewById(R.id.topMenuRecyclerView)
         val topMenuLayoutManager = GridLayoutManager(context, 2, GridLayoutManager.HORIZONTAL, false)
@@ -36,23 +49,10 @@ class HomeFragment : Fragment() {
             val topMenuAdapter = recipes?.let { FoodAdapter(it, requireContext()) }
             topMenuRecyclerView.adapter = topMenuAdapter
         }
-
-        homeViewModel.findRecipes()
-
-        homeViewModel.isLoading.observe(viewLifecycleOwner){
-            showLoading(it)
-        }
-
-        return view
     }
 
     private fun showLoading(state: Boolean) {
         binding.progressBarTopMenu.visibility = if (state) View.VISIBLE else View.GONE
-    }
-
-    override fun onResume() {
-        super.onResume()
-        homeViewModel.findRecipes()
     }
 
 }

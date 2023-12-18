@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dicoding.cooknow.R
 import com.dicoding.cooknow.ui.detailRecipes.DetailRecipesActivity
 import com.dicoding.cooknow.ui.detailRecipes.RecipeItemClickListener
+import com.dicoding.cooknow.ui.findRecipes.FindRecipesFragment
+import com.dicoding.cooknow.ui.main.MainActivity
 
 class ListRecipesActivity : AppCompatActivity(), RecipeItemClickListener {
 
@@ -36,6 +38,12 @@ class ListRecipesActivity : AppCompatActivity(), RecipeItemClickListener {
             recyclerView.adapter = adapter
         }
 
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
 
     override fun onRecipeItemClicked(recipe: String) {
