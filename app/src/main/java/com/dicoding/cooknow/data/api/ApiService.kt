@@ -1,6 +1,8 @@
 package com.dicoding.cooknow.data.api
 
+import com.dicoding.cooknow.data.pref.RatingRequest
 import com.dicoding.cooknow.data.response.DetailRecipesResponse
+import com.dicoding.cooknow.data.response.GivingRatingResponse
 import com.dicoding.cooknow.data.response.PredictRecipesResponseItem
 import com.dicoding.cooknow.data.response.RecipesResponseItem
 import retrofit2.Call
@@ -19,4 +21,14 @@ interface ApiService {
     fun postIngredients(
         @Body request: HashMap<String, Any>
     ): Call<List<PredictRecipesResponseItem>>
+
+    @POST("rating")
+    fun addRatingRecipe(
+        @Body request: RatingRequest
+    ): Call<GivingRatingResponse>
+
+    @PUT("rating")
+    fun updateRatingRecipe(
+        @Body request: RatingRequest
+    ): Call<GivingRatingResponse>
 }

@@ -147,6 +147,9 @@
 
     <!-- Detail Recipes -->
     <string name="detail_recipe">Detail Recipe</string>
+    <string name="rate_recipes">Rate Recipe</string>
+    <string name="no">No</string>
+    <string name="yes">yes</string>
 
 
 </resources>

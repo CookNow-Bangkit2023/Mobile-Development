@@ -6,20 +6,22 @@ import android.os.Bundle
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import com.dicoding.cooknow.R
 import com.dicoding.cooknow.databinding.ActivityDetailRecipesBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.auth.FirebaseAuth
 
 class DetailRecipesActivity : AppCompatActivity() {
     private var tabLayout: TabLayout? = null
     private var viewPager: ViewPager2? = null
 
     private lateinit var detailViewModel: DetailViewModel
+    private lateinit var rateRecipeViewModel: RateRecipeViewModel
     private lateinit var binding: ActivityDetailRecipesBinding
+    private lateinit var auth: FirebaseAuth
 
     companion object {
         const val EXTRA_RECIPE_ID = "recipe_id"
@@ -38,6 +40,9 @@ class DetailRecipesActivity : AppCompatActivity() {
 
         // Set data
         detailViewModel = ViewModelProvider(this)[DetailViewModel::class.java]
+        rateRecipeViewModel = ViewModelProvider(this)[RateRecipeViewModel::class.java]
+        auth = FirebaseAuth.getInstance()
+
         val randomImageId = intent.getIntExtra(EXTRA_RANDOM_IMAGE_ID, -1)
         val recipe = intent.getIntExtra(EXTRA_RECIPE_ID, -1)
 
@@ -45,6 +50,7 @@ class DetailRecipesActivity : AppCompatActivity() {
             if (recipe != null) {
                 binding.imgList.setImageResource(randomImageId)
                 binding.tvListName.text = recipe.resultRecipe?.name ?: ""
+                binding.ratingRate.text = recipe.averageRating?.toString() ?: "N/A"
                 setupViewPager(viewPager!!)
                 val tabTitles = arrayOf("Ingredient", "Procedure")
                 TabLayoutMediator(tabLayout!!, viewPager!!) { tab, position ->
@@ -77,6 +83,17 @@ class DetailRecipesActivity : AppCompatActivity() {
             }
         }
         detailViewModel.detailRecipes(recipe)
+
+        val userID =  auth.currentUser!!.uid
+        val rateRecipeDialog = RateRecipeDialog(this, rateRecipeViewModel, userID, recipe)
+
+        binding.ratingShape.setOnClickListener{
+            rateRecipeDialog.show {rating ->
+                rateRecipeViewModel.addRating.observe(this){ ratingResponse ->
+
+                }
+            }
+        }
     }
 
     private fun setupViewPager(viewPager: ViewPager2) {
