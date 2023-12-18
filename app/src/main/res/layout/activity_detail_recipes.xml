@@ -15,37 +15,9 @@
         android:padding="10dp"
         tools:ignore="MissingConstraints">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/imageBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/back"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-
-        <TextView
-            android:id="@+id/textListRecipes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/detail_recipe"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="#000000"
-            android:layout_marginStart="120dp"
-            app:layout_constraintStart_toEndOf="@id/imageBack"
-            app:layout_constraintTop_toTopOf="@id/imageBack"
-            app:layout_constraintBottom_toBottomOf="@id/imageBack"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
-        android:layout_width="375dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         app:elevation="10dp"
@@ -69,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginTop="130dp"
-            android:layout_marginStart="180dp"
+            android:layout_marginStart="200dp"
             android:gravity="center_vertical"
             android:padding="4dp"
             android:orientation="horizontal"

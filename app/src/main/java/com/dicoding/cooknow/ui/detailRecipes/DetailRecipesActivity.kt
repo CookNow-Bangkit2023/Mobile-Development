@@ -81,11 +81,6 @@ class DetailRecipesActivity : AppCompatActivity() {
                         // Aksi jika tab sudah dipilih kembali
                     }
                 })
-
-                val imageBack: ImageView = findViewById(R.id.imageBack)
-                imageBack.setOnClickListener {
-                    onBackPressed() // Ganti dengan aksi yang ingin Anda lakukan
-                }
             }
         }
         detailViewModel.detailRecipes(recipe)

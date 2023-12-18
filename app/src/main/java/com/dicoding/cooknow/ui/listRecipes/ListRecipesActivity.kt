@@ -36,10 +36,6 @@ class ListRecipesActivity : AppCompatActivity(), RecipeItemClickListener {
             recyclerView.adapter = adapter
         }
 
-        val imageBack: ImageView = findViewById(R.id.imageBack)
-        imageBack.setOnClickListener {
-            onBackPressed()
-        }
     }
 
     override fun onRecipeItemClicked(recipe: String) {

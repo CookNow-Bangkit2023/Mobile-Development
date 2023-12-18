@@ -137,7 +137,7 @@
 
     <!-- List Recipes -->
     <string name="list_recipes">List Recipes</string>
-    <string name="rating">Rating</string>
+    <string name="rating">0</string>
     <string name="step">Step</string>
     <string name="description_text">Lorem Ipsum tempor incididunt ut labore et dolore,in voluptate velit esse cillum dolore eu fugiat nulla pariatur?</string>
     <string name="netto">100g</string>
