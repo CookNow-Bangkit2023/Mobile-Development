@@ -18,6 +18,19 @@
         app:layout_constraintBottom_toTopOf="@id/scrollView">
     </com.google.android.material.search.SearchBar>
 
+    <com.google.android.material.search.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:hint="@string/search_ingredients"
+        app:layout_anchor="@id/searchBar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+    </com.google.android.material.search.SearchView>
+
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="0dp"

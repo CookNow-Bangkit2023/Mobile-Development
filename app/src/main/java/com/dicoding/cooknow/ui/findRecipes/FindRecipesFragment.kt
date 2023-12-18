@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.cooknow.R
 import com.dicoding.cooknow.data.DataUtils
+import com.dicoding.cooknow.databinding.FragmentFindRecipesBinding
 import com.dicoding.cooknow.ui.home.HomeViewModel
 import com.dicoding.cooknow.ui.listRecipes.ListRecipesActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -19,6 +20,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 
 class FindRecipesFragment : Fragment() {
+    private lateinit var binding: FragmentFindRecipesBinding
     private val selectedIngredients = mutableListOf("salt", "pepper", "water", "sugar")
     private lateinit var findRecipesViewModel: FindRecipesViewModel
     private lateinit var auth: FirebaseAuth
@@ -27,7 +29,8 @@ class FindRecipesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_find_recipes, container, false)
+        binding = FragmentFindRecipesBinding.inflate(inflater, container, false)
+        val view = binding.root
         findRecipesViewModel = ViewModelProvider(this)[FindRecipesViewModel::class.java]
 
         auth = FirebaseAuth.getInstance()

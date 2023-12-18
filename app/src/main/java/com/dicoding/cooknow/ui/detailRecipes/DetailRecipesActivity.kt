@@ -13,6 +13,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
+import java.text.DecimalFormat
 
 class DetailRecipesActivity : AppCompatActivity() {
     private var tabLayout: TabLayout? = null
@@ -50,7 +51,12 @@ class DetailRecipesActivity : AppCompatActivity() {
             if (recipe != null) {
                 binding.imgList.setImageResource(randomImageId)
                 binding.tvListName.text = recipe.resultRecipe?.name ?: ""
-                binding.ratingRate.text = recipe.averageRating?.toString() ?: "N/A"
+
+                val averageRating = recipe.averageRating ?: 0.0 // Use the default value as needed
+                val decimalFormat = DecimalFormat("#.#")
+                val formattedRating = decimalFormat.format(averageRating)
+                binding.ratingRate.text = formattedRating
+
                 setupViewPager(viewPager!!)
                 val tabTitles = arrayOf("Ingredient", "Procedure")
                 TabLayoutMediator(tabLayout!!, viewPager!!) { tab, position ->
