@@ -53,12 +53,40 @@ class ProceduresViewModel: ViewModel() {
     }
 
     private fun parseProceduresList(procedureString: String): List<String> {
-        // Use regex to match content inside single quotes
-        val regex = Regex("'(.*?)'")
-        val matches = regex.findAll(procedureString)
+        // Remove square brackets from the entire string
+        val sanitizedString = procedureString.removeSurrounding("[", "]")
 
-        // Extract matched content and map it to a list of strings
-        return matches.map { it.groupValues[1] }.toList()
+        val steps = mutableListOf<String>()
+        var insideQuotes = false
+        val builder = StringBuilder()
+
+        for (char in sanitizedString) {
+            when {
+                char == '\'' -> insideQuotes = !insideQuotes
+                char == ',' && !insideQuotes -> {
+                    val step = builder.toString().trim()
+                    if (step.isNotBlank()) {
+                        steps.add(step)
+                    }
+                    builder.clear()
+                }
+                else -> builder.append(char)
+            }
+        }
+
+        // Add the last step
+        val lastStep = builder.toString().trim()
+        if (lastStep.isNotBlank()) {
+            steps.add(lastStep)
+        }
+
+        // Handle multiline steps by splitting on newline characters
+        val finalSteps = mutableListOf<String>()
+        steps.forEach { step ->
+            finalSteps.addAll(step.split('\n').map { it.trim() })
+        }
+
+        return finalSteps
     }
 
     companion object {
