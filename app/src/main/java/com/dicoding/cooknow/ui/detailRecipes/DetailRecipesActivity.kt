@@ -23,6 +23,7 @@ class DetailRecipesActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_RECIPE_ID = "recipe_id"
+        const val EXTRA_RANDOM_IMAGE_ID = "random_image_id"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,10 +38,12 @@ class DetailRecipesActivity : AppCompatActivity() {
 
         // Set data
         detailViewModel = ViewModelProvider(this)[DetailViewModel::class.java]
+        val randomImageId = intent.getIntExtra(EXTRA_RANDOM_IMAGE_ID, -1)
         val recipe = intent.getIntExtra(EXTRA_RECIPE_ID, -1)
 
         detailViewModel.detailRecipes.observe(this) { recipe ->
             if (recipe != null) {
+                binding.imgList.setImageResource(randomImageId)
                 binding.tvListName.text = recipe.resultRecipe?.name ?: ""
                 setupViewPager(viewPager!!)
                 val tabTitles = arrayOf("Ingredient", "Procedure")
