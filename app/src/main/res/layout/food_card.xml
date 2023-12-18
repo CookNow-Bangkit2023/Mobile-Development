@@ -22,7 +22,7 @@
             android:layout_height="180dp"
             android:scaleType="centerCrop"
             android:src="@drawable/img_15"
-            android:foreground="@drawable/transfaran"/>
+            android:foreground="@drawable/transparan"/>
 
         <TextView
             android:id="@+id/tv_meal_name"

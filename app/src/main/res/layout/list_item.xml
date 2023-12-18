@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         app:elevation="10dp"
-        app:cardCornerRadius="5dp"
+        app:cardCornerRadius="15dp"
         app:cardUseCompatPadding="true"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +23,7 @@
             android:layout_height="180dp"
             android:scaleType="centerCrop"
             android:src="@drawable/img_15"
-            android:foreground="@drawable/transfaran"/>
+            android:foreground="@drawable/transparan"/>
 
         <TextView
             android:id="@+id/tv_list_name"
