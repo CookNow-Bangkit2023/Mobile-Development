@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginTop="130dp"
-            android:layout_marginStart="200dp"
+            android:layout_marginStart="15dp"
             android:gravity="center_vertical"
             android:padding="4dp"
             android:orientation="horizontal"
@@ -51,26 +51,6 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="@drawable/star_rating" />
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/star_rating" />
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/star_rating" />
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/star_rating" />
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/stars" />
 
             <TextView
                 android:id="@+id/rating_rate"
