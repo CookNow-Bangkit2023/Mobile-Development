@@ -4,13 +4,21 @@ import com.dicoding.cooknow.data.pref.RatingRequest
 import com.dicoding.cooknow.data.response.DetailRecipesResponse
 import com.dicoding.cooknow.data.response.GivingRatingResponse
 import com.dicoding.cooknow.data.response.PredictRecipesResponseItem
+import com.dicoding.cooknow.data.response.RecipesResponse
 import com.dicoding.cooknow.data.response.RecipesResponseItem
+import com.dicoding.cooknow.data.response.SearchRecipesResponse
+import com.dicoding.cooknow.data.response.SearchRecipesResponseItem
 import retrofit2.Call
 import retrofit2.http.*
 
 interface ApiService {
     @GET("recipes")
     fun getRecipes(): Call<List<RecipesResponseItem>>
+
+    @GET("search/{recipe}")
+    fun getSearchRecipe(
+        @Path("recipe") recipeName: String
+    ): Call<List<SearchRecipesResponseItem>>
 
     @GET("recipe/rating/{id}")
     fun getDetailRecipes(
@@ -24,11 +32,6 @@ interface ApiService {
 
     @POST("rating")
     fun addRatingRecipe(
-        @Body request: RatingRequest
-    ): Call<GivingRatingResponse>
-
-    @PUT("rating")
-    fun updateRatingRecipe(
         @Body request: RatingRequest
     ): Call<GivingRatingResponse>
 }
