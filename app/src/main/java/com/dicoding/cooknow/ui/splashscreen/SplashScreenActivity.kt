@@ -65,7 +65,7 @@ class SplashScreenActivity : AppCompatActivity() {
 
                     startActivity(intent)
                     finish()
-                }, 1000)
+                }, 500)
             }
 
             override fun onTransitionTrigger(
