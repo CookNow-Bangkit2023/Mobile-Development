@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dicoding.cooknow.R
 import com.dicoding.cooknow.databinding.FragmentHomeBinding
+import com.dicoding.cooknow.ui.detailRecipes.DetailRecipesActivity
 import com.dicoding.cooknow.ui.listRecipes.Food
 
 class HomeFragment : Fragment() {
@@ -54,6 +55,22 @@ class HomeFragment : Fragment() {
                 }
         }
 
+
+        binding.recipeList.setOnItemClickListener { parent, view, position, id ->
+            // Mengambil ID resep berdasarkan posisi yang diklik
+            val selectedRecipeId = homeViewModel.searchrecipesResponseItem.value?.get(position)?.id
+
+            // Memeriksa apakah ID resep tidak null sebelum memulai DetailRecipesActivity
+            selectedRecipeId?.let {
+                val randomImageId = getRandomImageId()
+
+                val intent = Intent(activity, DetailRecipesActivity::class.java)
+                intent.putExtra(DetailRecipesActivity.EXTRA_RECIPE_ID, it)
+                intent.putExtra(DetailRecipesActivity.EXTRA_RANDOM_IMAGE_ID, randomImageId)
+                startActivity(intent)
+            }
+        }
+
         return view
     }
 
@@ -81,4 +98,17 @@ class HomeFragment : Fragment() {
         binding.progressBarTopMenu.visibility = if (state) View.VISIBLE else View.GONE
     }
 
+    private fun getRandomImageId(): Int {
+        val imageArray = arrayOf(
+            R.drawable.img_1, R.drawable.img_2, R.drawable.img_3,
+            R.drawable.img_4, R.drawable.img_5, R.drawable.img_6,
+            R.drawable.img_7, R.drawable.img_8, R.drawable.img_9,
+            R.drawable.img_10, R.drawable.img_11, R.drawable.img_12,
+            R.drawable.img_13, R.drawable.img_14, R.drawable.img_15
+        )
+        // Mendapatkan indeks acak dari imageArray
+        val randomIndex = (0 until imageArray.size).random()
+        // Mendapatkan ID gambar dari imageArray sesuai indeks acak
+        return imageArray[randomIndex]
+    }
 }
