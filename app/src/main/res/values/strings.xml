@@ -3,8 +3,8 @@
 
     <!-- Welcome Screen -->
     <string name="header_screen">100K+ Premium Recipe</string>
-    <string name="title_screen">Get\n Cooking</string>
-    <string name="desc_screen">Simple way to find Tasty Recipe</string>
+    <string name="title_screen">CookNow</string>
+    <string name="desc_screen">Cook Smart, Waste Nothing</string>
     <string name="button_screen">Start CookNow</string>
 
     <!-- Login -->

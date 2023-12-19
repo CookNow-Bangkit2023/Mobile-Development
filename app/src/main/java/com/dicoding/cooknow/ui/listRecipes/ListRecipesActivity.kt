@@ -2,7 +2,9 @@ package com.dicoding.cooknow.ui.listRecipes
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dicoding.cooknow.R
@@ -22,12 +24,14 @@ class ListRecipesActivity : AppCompatActivity(), RecipeItemClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_recipes)
 
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
         recyclerView = findViewById(R.id.listrecipesRecyclerView)
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         val recipeList = intent.getSerializableExtra(ListRecipesActivity.EXTRA_LIST_ID) as? List<Pair<Int, String>>
-
 
         if (!recipeList.isNullOrEmpty()) {
             val adaptedRecipes = recipeList.map { it } // Keep existing id and name pairs
@@ -35,6 +39,10 @@ class ListRecipesActivity : AppCompatActivity(), RecipeItemClickListener {
             recyclerView.adapter = adapter
         }
 
+        supportActionBar?.apply {
+            title = "List Recipes"
+            setDisplayHomeAsUpEnabled(true)
+        }
     }
 
     override fun onBackPressed() {
@@ -47,5 +55,15 @@ class ListRecipesActivity : AppCompatActivity(), RecipeItemClickListener {
         val intent = Intent(this, DetailRecipesActivity::class.java)
         intent.putExtra("RECIPE_NAME", recipe)
         startActivity(intent)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
     }
 }

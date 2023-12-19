@@ -7,21 +7,22 @@
     android:background="@drawable/welcome_screen"
     tools:context=".ui.welcome.WelcomeActivity">
 
-    <ImageButton
+    <ImageView
         android:id="@+id/logoApp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="50dp"
         android:src="@drawable/logo_app"
         android:background="@android:color/transparent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/titleWelcome"/>
 
     <TextView
+        android:id="@+id/titleWelcome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
         android:text="@string/header_screen"
         android:textColor="@color/white"
         android:textSize="25sp"
@@ -34,24 +35,24 @@
 
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
         android:text="@string/title_screen"
         android:textColor="@color/white"
-        android:textSize="50sp"
+        android:textSize="60sp"
         android:textStyle="bold"
-        android:gravity="center"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/descScreen"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/descScreen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="72dp"
+        android:layout_marginBottom="180dp"
         android:text="@string/desc_screen"
         android:textColor="@color/white"
         android:textSize="18sp"

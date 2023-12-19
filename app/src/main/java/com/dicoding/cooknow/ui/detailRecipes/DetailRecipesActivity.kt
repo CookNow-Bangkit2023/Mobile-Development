@@ -3,9 +3,10 @@ package com.dicoding.cooknow.ui.detailRecipes
 import SectionPagerAdapter
 import android.graphics.Color
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.dicoding.cooknow.R
@@ -36,6 +37,14 @@ class DetailRecipesActivity : AppCompatActivity() {
         setContentView(binding.root)
         tabLayout = binding.tabs
         viewPager = findViewById(R.id.view_pager)
+
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
+        supportActionBar?.apply {
+            title = "Detail Recipe"
+            setDisplayHomeAsUpEnabled(true)
+        }
 
         // Set warna teks secara langsung pada tab pertama kali dimuat
         tabLayout?.setTabTextColors(Color.BLACK, Color.BLACK)
@@ -116,5 +125,15 @@ class DetailRecipesActivity : AppCompatActivity() {
         adapter.addFragment(IngredientFragment.newInstance(recipeId), "Ingredient")
         adapter.addFragment(ProcedureFragment.newInstance(recipeId), "Procedure")
         viewPager.adapter = adapter
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
     }
 }

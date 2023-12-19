@@ -92,7 +92,7 @@
             android:layout_weight="1"
             android:background="@drawable/item_button"
             android:backgroundTint="@color/white"
-            android:text="@string/chicken"
+            android:text="@string/egg"
             android:textSize="11sp"
             android:textColor="#000000"
             tools:ignore="TouchTargetSizeCheck" />
@@ -228,8 +228,8 @@
             android:layout_weight="1"
             android:background="@drawable/item_button"
             android:backgroundTint="@color/white"
-            android:text="@string/spaghetti"
-            android:textSize="8sp"
+            android:text="@string/onion"
+            android:textSize="11sp"
             android:textColor="#000000"
             tools:ignore="TouchTargetSizeCheck" />
     </LinearLayout>
