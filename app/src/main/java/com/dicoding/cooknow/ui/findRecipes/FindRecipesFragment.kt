@@ -1,7 +1,9 @@
 package com.dicoding.cooknow.ui.findRecipes
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -24,6 +26,7 @@ class FindRecipesFragment : Fragment() {
     private val selectedIngredients = mutableListOf("salt", "pepper", "water", "sugar")
     private lateinit var findRecipesViewModel: FindRecipesViewModel
     private lateinit var auth: FirebaseAuth
+    private lateinit var progressDialog: ProgressDialog
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -91,11 +94,14 @@ class FindRecipesFragment : Fragment() {
     private fun setupFindRecipeButton(view: View) {
         val findRecipeButton: Button = view.findViewById(R.id.recipesButton)
         val userID =  auth.currentUser!!.uid
+        val loadingDialog = LoadingDialog(requireActivity())
 
         findRecipeButton.setOnClickListener {
+            loadingDialog.showLoadingDialog()
             Log.d("Button_Clicked", "Find Recipe button clicked")
             findRecipesViewModel.addIngredients(selectedIngredients, userID)
             findRecipesViewModel.findRecipes.observe(viewLifecycleOwner) { recipes ->
+                loadingDialog.hideDialog()
                 val validRecipes = recipes?.filterNotNull()
 
                 val recipeList = ArrayList<Pair<Int, String>>()
@@ -110,6 +116,26 @@ class FindRecipesFragment : Fragment() {
                 intent.putExtra(ListRecipesActivity.EXTRA_LIST_ID, recipeList)
                 startActivity(intent)
             }
+        }
+    }
+
+    private fun showProgressDialog() {
+        progressDialog = ProgressDialog(requireContext())
+        progressDialog.setMessage("Loading...")
+        progressDialog.setCancelable(false)
+        progressDialog.show()
+
+        // Set a handler to dismiss the dialog after a certain delay or when the data is loaded
+        Handler().postDelayed({
+            if (progressDialog.isShowing) {
+                progressDialog.dismiss()
+            }
+        }, 10000) // 10 seconds timeout, adjust as needed
+    }
+
+    private fun hideProgressDialog() {
+        if (progressDialog.isShowing) {
+            progressDialog.dismiss()
         }
     }
 }
