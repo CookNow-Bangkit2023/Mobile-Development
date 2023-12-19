@@ -96,8 +96,11 @@ class DetailRecipesActivity : AppCompatActivity() {
 
         binding.ratingShape.setOnClickListener{
             rateRecipeDialog.show {rating ->
-                rateRecipeViewModel.addRating.observe(this){ ratingResponse ->
-
+                rateRecipeViewModel.newRating.observe(this) { newRating ->
+                    // Update tampilan rating di sini
+                    val decimalFormat = DecimalFormat("#.#")
+                    val formattedRating = decimalFormat.format(newRating)
+                    binding.ratingRate.text = formattedRating
                 }
             }
         }

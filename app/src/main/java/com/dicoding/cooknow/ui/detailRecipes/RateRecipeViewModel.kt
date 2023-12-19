@@ -15,6 +15,9 @@ class RateRecipeViewModel: ViewModel() {
     private val _addRating = MutableLiveData<GivingRatingResponse?>()
     val addRating: MutableLiveData<GivingRatingResponse?> = _addRating
 
+    private val _newRating = MutableLiveData<Double>()
+    val newRating: LiveData<Double> = _newRating
+
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
@@ -30,6 +33,7 @@ class RateRecipeViewModel: ViewModel() {
                 if (response.isSuccessful) {
                     val add = response.body()
                     _addRating.value = add
+                    updateRating(rating)
                 } else {
                     Log.e(TAG, "onFailure: ${response.message()}")
                 }
@@ -40,6 +44,10 @@ class RateRecipeViewModel: ViewModel() {
                 Log.e(TAG, "onFailure: ${t.message}")
             }
         })
+    }
+
+    fun updateRating(newRating: Double) {
+        _newRating.value = newRating
     }
 
     companion object {
