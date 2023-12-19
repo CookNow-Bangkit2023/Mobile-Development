@@ -27,6 +27,8 @@ class FindRecipesFragment : Fragment() {
     private lateinit var findRecipesViewModel: FindRecipesViewModel
     private lateinit var auth: FirebaseAuth
     private lateinit var progressDialog: ProgressDialog
+    private val allButtons = mutableListOf<Button>()
+    private var isSearchActive = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,9 +40,22 @@ class FindRecipesFragment : Fragment() {
 
         auth = FirebaseAuth.getInstance()
 
+        with(binding){
+            searchView.setupWithSearchBar(searchBar)
+            searchView
+                .editText
+                .setOnEditorActionListener { _, _, _ ->
+                    val query = searchView.text.toString()
+                    handleSearchQuery(query)
+                    searchView.hide()
+                    false
+                }
+        }
+
         createButtons(view)
         setupFindRecipeButton(view)
         return view
+
     }
 
     private fun createButtons(view: View) {
@@ -76,11 +91,20 @@ class FindRecipesFragment : Fragment() {
             )
             button.layoutParams = params
 
+            allButtons.add(button)
             gridLayout.addView(button)
         }
     }
 
     private fun onIngredientButtonClick(button: Button, ingredient: String) {
+        if (isSearchActive) {
+            // Reset visibilitas semua tombol
+            for (b in allButtons) {
+                b.visibility = View.VISIBLE
+            }
+            isSearchActive = false
+        }
+
         if (selectedIngredients.contains(ingredient)) {
             selectedIngredients.remove(ingredient)
             button.setBackgroundResource(R.drawable.item_button)
@@ -88,6 +112,23 @@ class FindRecipesFragment : Fragment() {
             Log.e("FindRecipes","Find Recipes $selectedIngredients")
             selectedIngredients.add(ingredient)
             button.setBackgroundResource(R.drawable.after_click)
+        }
+    }
+
+    private fun handleSearchQuery(query: String) {
+        if (query.isNotEmpty()) {
+            isSearchActive = true
+            for (button in allButtons) {
+                val buttonText = button.text.toString().toLowerCase()
+
+                if (buttonText.contains(query.toLowerCase())) {
+                    button.visibility = View.VISIBLE
+                } else {
+                    button.visibility = View.GONE
+                }
+            }
+        } else {
+            isSearchActive = false
         }
     }
 
