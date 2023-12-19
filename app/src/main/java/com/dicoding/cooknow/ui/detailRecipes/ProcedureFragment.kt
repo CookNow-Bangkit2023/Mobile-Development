@@ -49,13 +49,21 @@ class ProcedureFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
 
-        proceduresViewModel.proceduresList.observe(viewLifecycleOwner){ procedures ->
-            adapter.updateData(procedures)
+        proceduresViewModel.isLoading.observe(viewLifecycleOwner){
+            showLoading(it)
         }
 
         proceduresViewModel.getProcedure(recipeId)
 
+        proceduresViewModel.proceduresList.observe(viewLifecycleOwner){ procedures ->
+            adapter.updateData(procedures)
+        }
+
         return view
+    }
+
+    private fun showLoading(state: Boolean) {
+        binding.progressBar.visibility = if (state) View.VISIBLE else View.GONE
     }
 
     class ProcedureAdapter(private var procedures: List<String>, private val recipeId: Int) :

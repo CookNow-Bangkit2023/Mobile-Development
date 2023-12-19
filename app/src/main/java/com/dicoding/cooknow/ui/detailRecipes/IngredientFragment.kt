@@ -51,15 +51,21 @@ class IngredientFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
 
-        ingredientsViewModel.ingredientsList.observe(viewLifecycleOwner) { ingredients ->
-            // Update your UI with the list of ingredients
-            // For example, you can use this list to populate a RecyclerView or other UI elements
-            adapter.updateData(ingredients)
+        ingredientsViewModel.isLoading.observe(viewLifecycleOwner){
+            showLoading(it)
         }
 
         ingredientsViewModel.getIngredients(recipeId)
 
+        ingredientsViewModel.ingredientsList.observe(viewLifecycleOwner) { ingredients ->
+            adapter.updateData(ingredients)
+        }
+
         return view
+    }
+
+    private fun showLoading(state: Boolean) {
+        binding.progressBar.visibility = if (state) View.VISIBLE else View.GONE
     }
 
     class IngredientAdapter(private var ingredients: List<String>) :

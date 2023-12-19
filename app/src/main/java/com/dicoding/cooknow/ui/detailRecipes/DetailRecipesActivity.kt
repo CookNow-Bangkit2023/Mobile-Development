@@ -3,6 +3,7 @@ package com.dicoding.cooknow.ui.detailRecipes
 import SectionPagerAdapter
 import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -48,6 +49,11 @@ class DetailRecipesActivity : AppCompatActivity() {
         val recipe = intent.getIntExtra(EXTRA_RECIPE_ID, -1)
 
         detailViewModel.detailRecipes.observe(this) { recipe ->
+
+            detailViewModel.isLoading.observe(this){
+                showLoading(it)
+            }
+
             if (recipe != null) {
                 binding.imgList.setImageResource(randomImageId)
                 binding.tvListName.text = recipe.resultRecipe?.name ?: ""
@@ -95,6 +101,10 @@ class DetailRecipesActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun showLoading(state: Boolean) {
+        binding.progressBar.visibility = if (state) View.VISIBLE else View.GONE
     }
 
     private fun setupViewPager(viewPager: ViewPager2) {
