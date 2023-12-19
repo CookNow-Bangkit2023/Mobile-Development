@@ -3,13 +3,18 @@
     <style name="Base.Theme.CookNow" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <item name="colorPrimary">#129575</item>
+        <item name="colorOnSecondaryContainer">#FFFFFF</item>
+        <item name="colorOnSurface">#000000</item>
+        <item name="colorSecondaryContainer">#D519AD89</item>
     </style>
+
 
     <style name="Theme.CookNow" parent="Base.Theme.CookNow" />
 
     <style name="SplashScreenTheme" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <item name="colorPrimary">#129575</item>
+        <item name="android:windowIsTranslucent">true</item>
     </style>
 
     <style name="RatingRecipe" parent="Widget.AppCompat.RatingBar">

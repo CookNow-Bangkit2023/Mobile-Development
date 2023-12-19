@@ -1,7 +1,29 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.CookNow" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+    <style name="Base.Theme.CookNow" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">#129575</item>
+        <item name="colorOnSecondaryContainer">#FFFFFF</item>
+        <item name="colorOnSurface">#000000</item>
+        <item name="colorSecondaryContainer">#D519AD89</item>
+    </style>
+
+
+    <style name="Theme.CookNow" parent="Base.Theme.CookNow" />
+
+    <style name="SplashScreenTheme" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">#129575</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="RatingRecipe" parent="Widget.AppCompat.RatingBar">
+
+        <!-- Non Selected Color -->
+        <item name="colorControlNormal">#4D000000</item>
+
+        <!-- Selected Color -->
+        <item name="colorControlActivated">#FFAD30</item>
+
     </style>
 </resources>

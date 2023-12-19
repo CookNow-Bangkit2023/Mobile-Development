@@ -6,11 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
+import com.dicoding.cooknow.R
 import com.dicoding.cooknow.databinding.FragmentProfileBinding
 import com.dicoding.cooknow.ui.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ProfileFragment : Fragment() {
 
@@ -24,11 +29,24 @@ class ProfileFragment : Fragment() {
 
         auth = FirebaseAuth.getInstance()
 
+        val builder = AlertDialog.Builder(requireContext())
+
         binding.logoutButton.setOnClickListener {
-            auth.signOut()
-            val intent = Intent(activity, LoginActivity::class.java)
-            startActivity(intent)
-            activity?.finish()
+            builder.setTitle(R.string.logout_title)
+            builder.setMessage(R.string.logoutMessage)
+            builder.setPositiveButton(R.string.yes) { _, _ ->
+                CoroutineScope(Dispatchers.IO).launch {
+                    auth.signOut()
+                }
+                val intent = Intent(activity, LoginActivity::class.java)
+                startActivity(intent)
+                activity?.finish()
+            }
+            builder.setNegativeButton(R.string.no) { dialog, _ ->
+                dialog.dismiss()
+            }
+            builder.show()
+            builder.create()
         }
 
         showIdentity()

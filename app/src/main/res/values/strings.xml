@@ -46,6 +46,8 @@
     <string name="username">username</string>
     <string name="post_email">post email</string>
     <string name="logout">Logout</string>
+    <string name="logout_title">Logout Confirmation</string>
+    <string name="logoutMessage">You sure want to Logout?</string>
     <string name="content_home">content_home</string>
     <string name="content_add">content_add</string>
     <string name="content_profil">content_profil</string>
@@ -150,7 +152,7 @@
     <string name="detail_recipe">Detail Recipe</string>
     <string name="rate_recipes">Rate Recipe</string>
     <string name="no">No</string>
-    <string name="yes">yes</string>
+    <string name="yes">Yes</string>
 
 
 </resources>
