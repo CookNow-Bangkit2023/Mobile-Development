@@ -9,9 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.dicoding.cooknow.R
-import com.dicoding.cooknow.data.response.PredictRecipesResponseItem
 import com.dicoding.cooknow.ui.detailRecipes.DetailRecipesActivity
-import com.dicoding.cooknow.ui.detailRecipes.RecipeItemClickListener
 
 class RecipesAdapter(
     private val recipesList: List<Pair<Int, String>>,

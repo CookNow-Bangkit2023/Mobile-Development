@@ -2,14 +2,11 @@ package com.dicoding.cooknow.ui.listRecipes
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dicoding.cooknow.R
 import com.dicoding.cooknow.ui.detailRecipes.DetailRecipesActivity
-import com.dicoding.cooknow.ui.detailRecipes.RecipeItemClickListener
-import com.dicoding.cooknow.ui.findRecipes.FindRecipesFragment
 import com.dicoding.cooknow.ui.main.MainActivity
 
 class ListRecipesActivity : AppCompatActivity(), RecipeItemClickListener {

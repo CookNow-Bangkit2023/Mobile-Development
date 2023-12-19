@@ -134,6 +134,7 @@
 
     <string name="find_recipes">Find Recipes</string>
     <string name="traditional_spare_ribs_baked">Traditional Spare Ribs Baked</string>
+    <string name="loading_find_recipes">Please Wait...</string>
 
     <!-- List Recipes -->
     <string name="list_recipes">List Recipes</string>
