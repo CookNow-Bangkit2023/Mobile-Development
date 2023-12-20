@@ -10,9 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dicoding.cooknow.R
-import com.dicoding.cooknow.databinding.FragmentHomeBinding
 import com.dicoding.cooknow.databinding.FragmentIngredientBinding
-import com.dicoding.cooknow.ui.home.HomeViewModel
 import com.dicoding.cooknow.ui.model.IngredientsViewModel
 
 class IngredientFragment : Fragment() {

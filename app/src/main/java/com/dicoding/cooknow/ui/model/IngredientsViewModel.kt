@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dicoding.cooknow.data.api.ApiConfig
 import com.dicoding.cooknow.data.response.DetailRecipesResponse
-import com.dicoding.cooknow.ui.detailRecipes.DetailViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

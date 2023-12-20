@@ -15,11 +15,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.dicoding.cooknow.R
 import com.dicoding.cooknow.data.DataUtils
 import com.dicoding.cooknow.databinding.FragmentFindRecipesBinding
-import com.dicoding.cooknow.ui.home.HomeViewModel
 import com.dicoding.cooknow.ui.listRecipes.ListRecipesActivity
 import com.google.firebase.auth.FirebaseAuth
-import org.json.JSONArray
-import org.json.JSONObject
 
 class FindRecipesFragment : Fragment() {
     private lateinit var binding: FragmentFindRecipesBinding

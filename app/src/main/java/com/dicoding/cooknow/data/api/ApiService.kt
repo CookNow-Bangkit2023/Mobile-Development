@@ -4,9 +4,7 @@ import com.dicoding.cooknow.data.pref.RatingRequest
 import com.dicoding.cooknow.data.response.DetailRecipesResponse
 import com.dicoding.cooknow.data.response.GivingRatingResponse
 import com.dicoding.cooknow.data.response.PredictRecipesResponseItem
-import com.dicoding.cooknow.data.response.RecipesResponse
 import com.dicoding.cooknow.data.response.RecipesResponseItem
-import com.dicoding.cooknow.data.response.SearchRecipesResponse
 import com.dicoding.cooknow.data.response.SearchRecipesResponseItem
 import retrofit2.Call
 import retrofit2.http.*

@@ -4,7 +4,6 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.view.LayoutInflater
 import com.dicoding.cooknow.R
 
 class LoadingDialog(private val activity: Activity) {
