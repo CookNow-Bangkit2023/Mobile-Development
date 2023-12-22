@@ -5,7 +5,7 @@
 4. When user click on the "Find Recipes", the app will return recommended recipe.
 5. User also can see the detail of the recipe.
 6. In the detail page there will be ingredients, procedure of the recipe (The recipe can also be rating).
-7. Lastly the profile page, provides the username and email of the user (User can also logout)
+7. Lastly the profile page, provides the username and email of the user (User can also logout).
 
 ### Summary :
 This project uses fragment for the home, find recipe, and profile page. We use fragment because we also 
