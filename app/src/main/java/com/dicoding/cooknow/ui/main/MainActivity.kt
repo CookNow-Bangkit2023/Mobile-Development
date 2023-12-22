@@ -24,9 +24,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.home -> replaceFragment(HomeFragment())
                 R.id.add -> replaceFragment(FindRecipesFragment())
                 R.id.profile -> replaceFragment(ProfileFragment())
-                else -> {
-                    // Handle other cases if necessary
-                }
             }
             true
         }

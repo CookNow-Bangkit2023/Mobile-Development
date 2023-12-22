@@ -67,7 +67,7 @@ class DetailRecipesActivity : AppCompatActivity() {
                 binding.imgList.setImageResource(randomImageId)
                 binding.tvListName.text = recipe.resultRecipe?.name ?: ""
 
-                val averageRating = recipe.averageRating ?: 0.0 // Use the default value as needed
+                val averageRating = recipe.averageRating ?: 0.0 // Default value 0.0
                 val decimalFormat = DecimalFormat("#.#")
                 val formattedRating = decimalFormat.format(averageRating)
                 binding.ratingRate.text = formattedRating

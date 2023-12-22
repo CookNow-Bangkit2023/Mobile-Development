@@ -32,7 +32,7 @@ class ProceduresViewModel: ViewModel() {
                 if (response.isSuccessful) {
                     val procedureList = response.body()?.resultRecipe?.steps
                     if (!procedureList.isNullOrBlank()) {
-                        // Convert the string representation of a list into an actual list
+                        // Ubah representasi string dari list menjadi list yang sebenarnya
                         val procedures = parseProceduresList(procedureList)
                         _proceduresList.value = procedures
                         _procedureCount.value = procedures.size

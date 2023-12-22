@@ -90,7 +90,7 @@ class ProcedureFragment : Fragment() {
             private val procedureTextView: TextView = itemView.findViewById(R.id.tv_description)
 
             fun bind(step: String, position: Int, recipeId: Int) {
-                // Set the "Step" label dynamically based on the position
+                // Step label yang dinamis berdasarkan posisi
                 stepTextView.text = "Step $position"
                 procedureTextView.text = step
             }

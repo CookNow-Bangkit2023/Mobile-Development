@@ -80,7 +80,7 @@ class HomeFragment : Fragment() {
             showLoading(it)
         }
 
-        // RecyclerView for Top Menu
+        // RecyclerView untuk Top Menu
         val topMenuRecyclerView: RecyclerView = view.findViewById(R.id.topMenuRecyclerView)
         val topMenuLayoutManager = GridLayoutManager(context, 2, GridLayoutManager.HORIZONTAL, false)
         topMenuRecyclerView.layoutManager = topMenuLayoutManager

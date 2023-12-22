@@ -32,7 +32,7 @@ class IngredientsViewModel: ViewModel() {
                 if (response.isSuccessful) {
                     val ingredientsList = response.body()?.resultRecipe?.ingredients
                     if (!ingredientsList.isNullOrBlank()) {
-                        // Convert the string representation of a list into an actual list
+                        // Ubah representasi string dari list menjadi list yang sebenarnya
                         val ingredients = parseIngredientsList(ingredientsList)
                         _ingredientsList.value = ingredients
                         _ingredientCount.value = ingredients.size

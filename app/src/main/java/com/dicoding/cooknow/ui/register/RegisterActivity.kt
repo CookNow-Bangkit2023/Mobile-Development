@@ -87,6 +87,7 @@ class RegisterActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            // Validasi kesamaan password
             if (!confirmPassword.equals(password)){
                 binding.edtConfirmpasswordRegister.error = getString(R.string.confirm_password_invalid)
                 binding.edtConfirmpasswordRegister.requestFocus()

@@ -19,8 +19,4 @@ class SectionPagerAdapter(activity: FragmentActivity) : FragmentStateAdapter(act
     override fun createFragment(position: Int): Fragment {
         return fragmentList[position]
     }
-
-    fun getPageTitle(position: Int): CharSequence? {
-        return fragmentTitleList[position]
-    }
 }
